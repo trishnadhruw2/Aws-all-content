@@ -1,0 +1,49 @@
+Backup and Restore EC2 Instance:
+
+Step1: Create Web Server 
+
+Create and Launch EC2 instance with AMI Linux2 - Access it using putty - configure web server
+
+$sudo su
+#yum install httpd -y
+#systemctl restart httpd
+#systemctl enable httpd
+#vim /var/www/html/index.html
+<h1>Welcome to Pune Website</h1>
+:wq
+
+#systemctl restart httpd
+
+Update security group - add http 80 -save.
+
+Verify website its accessible in web-browser.
+
+====================================================================================================
+Step 2: Create Backup
+
+Service - AWS Backup - Dashboard - On Demand - resource type (EC2) -create on demand backup.
+
+Wait for backup process complete.
+====================================================================
+Ste3. Terminate Running instance.
+
+====================================================================
+Step4: Restore process.
+
+Service - AWS Backup - My Account - Backup Vaults -select created backup - click on Action - Restore - Restore Settings(default) - Restore Backup.
+
+====================================================================
+Step5: Check terminated instance restore from backup:
+
+service - Ec2 -
+after completion restore process - verify Instance is running or not.
+
+
+
+
+
+
+
+
+
+

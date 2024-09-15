@@ -1,0 +1,36 @@
+Steps for s3 bucket Backup:
+======================================================================================
+Step1: Create Bucket
+
+Service - S3 bucket - Create Bucket - Bucket Name (webdatapune) ) - Region (london) - Bucket Settings for block public Access (remove check box of Block all public - i acknowledge tha the current settings) - Bucket Versioning (Enable) - Create Bucket.
+======================================================================================
+Step2: Upload files in bucket
+Upoload few file in bucket
+
+click on bucket - upload - select desktop file - upload - close.
+======================================================================================
+Step3: Take Backup of Bucket
+
+Create Role - Service - IAM - roles -create role -select "AWS Service" - Service or use case "AWS Backup" - Select following policies - ("Amazones3FullAccess","AWSBackupServiceRolePolicyForBackup","AWSBackupServiceRolePolicyForRestore","AWSBackupFullAccess","AWSBackupServiceRolePolicyForS3Restore","AWSBackupServiceRolePolicyForS3Backup") - Next - Role Name (s3_backup_role) - Create Role.
+
+Service - AWS Backup - Dashboard - On demand backup - Resource Type (s3 ) bucket name (webdatapune) - Retaintion period (days 1) - backup vault (select default vault) - Backup vault name (default) encryption key (default)- create backup vault - IAM Role (choose an IAM role) (s3_backup_role)  -Create on-demand backup.
+
+wait for complete backup.
+======================================================================================
+After complete backup delete bucket.
+
+Step4: For restore
+
+Service - AWS Backup - backup vaults - (select vault) - Action - Restore - Restore Destination (Create new bucket - New bucket name - "my-pune-bucket2" - Restore Role (Choose an IAM role "s3_backup_role")- Restore Backup.
+
+wait for completion and check bucket it restore or not.
+
+======================================================================================
+step5: Check Restore bucket and data
+go into bucket and check deleted file availability.
+
+
+
+
+
+

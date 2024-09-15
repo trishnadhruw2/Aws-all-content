@@ -1,0 +1,50 @@
+
+Lab:
+Create Application Load Balancer:
+
+Step1: Create security group:
+
+Services - EC2 - Security group - create security group (sec-grp-lb)- ALL ICMP(icmp =0-65535),ssh (tcp 22) & http (tcp -80) - Create security group.
+
+
+Step2: Create 3 Instances:
+
+Create 1st EC2:
+EC2 - create instance - Linux AMI2 - select default VPC - az -2a - auto assigne ip enable -  security group (sec-grp-lb) - Launch instance.
+
+Create 2nd EC2:
+EC2 - create instance - Linux AMI2 - select default VPC - az -2b - auto assigne ip enable -  security group (sec-grp-lb)- Launch instance.
+
+Create 3rd EC2:
+EC2 - create instance - Linux AMI2 - select default VPC - az -2c - auto assigne ip enable -  security group (sec-grp-lb)- Launch instance.
+
+
+Create all above instance with following bootstrap script - (Apache Webserver)
+
+#!/bin/bash
+sudo yum update -y
+sudo yum install httpd -y
+sudo systemctl start httpd
+sudo systemctl enable httpd
+sudo echo "<html><head><title>pune</title></head><body bgcolor=yellow> <h1>Welcome to pune website</h1></body></html>" > /var/www/html/index.html
+sudo systemctl restart httpd
+
+Launch all instances and verify all working properly using web broswer.
+========================================================================================
+Step3: Create Target Group (Target means servers which handle load balancing)
+
+Services - EC2 - Load Balancing - Target Groups - Create Target Group - Choose a target type (Instances) - Target group name (web-tg1) - protocol (http) - Port(80) - Next - Available Instances (select instances all instance(3)) click on "Inclue as pending below" - Create target group.
+========================================================================================
+Step4: Create Load Balancer
+Services - EC2 - Load Balancing - Load Balancers - Create Load Balancer - Application Load Balancer - Name (web-lb) - Network  Mapping - VPC (Default) - Mappings (select 2a,2b,2c) - Security Group Create or select privious (sec-grp-lb) - Listeners and routing - Protocol (http) - port (80) - Default action (select target group -(wb-tg1)) - Create Load Balancer.
+========================================================================================
+Now wait for load balancer active status
+
+Target group - select web-tg1 - click on Targets - status (wait for status healthy).
+
+========================================================================================
+Step5: For Verify:
+Load balancer - appbancer - DNS name (copy it) - paste in web browser - refresh web pages.
+
+
+

@@ -1,0 +1,99 @@
+
+Step1: Launch EC2 Instance
+Service- Ec2 - Launch AMI Linux2 Instance - Access it using Putty (ec2-user)
+
+$ec2-user @ip
+$sudo su
+
+update package
+#yum update -y
+
+check docker is installed?
+#rpm -q docker
+#which docker
+#whereis docker
+#yum info docker
+
+For install docker
+#yum install docker -y
+
+for verify 
+#yum info docker
+#rpm -q docker
+#docker --version
+
+====================================================
+for show help
+#docker --help
+
+Start docker service and enable
+#systemctl status docker
+#systemctl start docker
+#systemctl enable docker
+
+
+for show docker available images
+#docker images
+
+For show runing containers
+#docker ps
+
+For show running as well as stop container
+#docker ps -a
+
+For pull image
+#docker pull ubuntu
+
+For search images
+#docker search centos
+
+For run container
+#docker run -it ubuntu /bin/bash
+
+-it interactive terminal
+
+#docker  ps
+
+For run container
+#docker run -dt ubuntu 
+
+-dt  - deattached terminal 
+
+#docker ps
+
+For access running container
+#docker exec -it dreamy_chaplygin /bin/bash
+
+For stop running container
+#docker stop dreamy_chaplygin 
+
+For remove container
+#docker rm dreamy_chaplygin 
+
+For run container with customization name
+#docker run -dt --name=ubuntu ubuntu
+
+#docker ps
+
+For kill container
+#docker kill ubuntu
+
+For start stoped container
+#docker start ubuntu
+#docker ps
+
+For docker image
+#docker images
+#docker rmi ubuntu
+#docker images
+
+#run website inside container
+#docker run -dt --name=webserver -t -p 80:80 httpd
+
+For create image of running container
+#docker commit webserver myweb
+#docker images
+
+
+
+

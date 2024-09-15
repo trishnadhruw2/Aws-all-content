@@ -1,0 +1,10 @@
+Assignment 2
+========================================================================
+1. Create windows web server and host website using IIS webserver. Set email alert if windows webserver cpu utilization 60 % higher in 5 min (average).
+
+2. Create amazon web server and gather apache web server error log in cloudwatch also gather memory and disk utilization using cloudagent. share dashboard publicaly.
+
+3. Create boostrap code for ubuntu operating system to configure nignx webserver and host free web template. ubuntu server ec2 instance should accessible using user itadmin with 111 password. itadmin should have sudo privileges.
+
+4. Create ec2_admin group. ec2_admin group can have full access of nginx server only (hosted on que 3). Internship group have read only access of EC2 Service for every region.
+=========================================================================

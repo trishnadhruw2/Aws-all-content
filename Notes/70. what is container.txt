@@ -1,0 +1,42 @@
+what is container:
+
+Containerization is the packaging together of software code with all it’s necessary components like libraries, frameworks, and other dependencies so that they are isolated in their own "container."
+
+This is so that the software or application within the container can be moved and run consistently in any environment and on any infrastructure, independent of that environment or infrastructure’s operating system. The container acts as a kind of bubble or a computing environment surrounding the application and keeping it independent of its surroundings. It’s basically a fully functional and portable computing environment.
+
+Containers are an alternative to coding on one platform or operating system, which made moving their application difficult since the code might not then be compatible with the new environment. This could result in bugs, errors, and glitches that needed fixing (meaning more time, less productivity, and a lot of frustration).
+
+By packaging up an application in a container that can be moved across platforms and infrastructures, that application can be used wherever you move it because it has everything it needs to run successfully within it.
+
+The idea of process isolation has been around for years, but when Docker introduced Docker Engine in 2013, it set a standard for container use with tools that were easy for developers to use, as well as a universal approach for packaging, which then accelerated the adoption of container technology. Today developers can choose from a selection of containerization platforms and tools—like Podman, Buildah, and Skopeo—that support the Open Container Initiative standards pioneered by Docker.
+======================================================================
+Benefits
+The "lightweight" or portability characteristic of containers comes from their ability to share the host machine’s operating system kernel, negating the need for a separate operating system for each container and allowing the application to run the same on any infrastructure—bare metal, cloud—even within virtual machines (VMs), as we’ll see in the next section. 
+
+Similarly, developers can use the same tools when working with containers in one host environment as they’d use in another, which makes the development and deployment of containerized apps across operating systems much more simple.
+======================================================================
+Containers vs. virtual machines
+A virtual machine (VM) is a virtual environment that functions as a virtual computer system with its own CPU, memory, network interface, and storage, created on a physical hardware system (located off- or on-premises).
+
+Containerization and virtualization are similar in that they both allow for full isolation of applications so that they can be operational in multiple environments. Where the main differences lie are in size and portability. 
+
+VMs are the larger of the two, typically measured by the gigabyte and containing their own OS, which allows them to perform multiple resource-intensive functions at once. The increased resources available to VMs allows them to abstract, split, duplicate, and emulate entire servers, operating systems, desktops, databases, and networks.
+
+Containers are much smaller, typically measured by the megabyte and not packaging anything bigger than an app and its running environment. 
+
+Where VMs work well with traditional, monolithic IT architecture, containers were made to be compatible with newer and emerging technology like clouds, CI/CD, and DevOps. 
+
+========================================================================
+Containers vs. microservices
+Containers are often used to package single functions that perform specific tasks—known as a microservice. Microservices are the breaking up of the parts of an application into smaller, more specialized services. This allows developers to focus on working on a specific area of an application, without impacting the app’s overall performance. 
+
+This means the apps stay up and running while updates are made or issues are fixed, allowing for faster improvements, testing, and deployment. 
+
+Microservices and containers work well together, as a microservice within a container has all the portability, compatibility, and scalability of a container. 
+===========================================================================
+Container orchestration
+Now, how to manage all those containers? That’s where container orchestration comes in. Container orchestration is the automation of the deployment, management, scaling, and networking of containers. 
+
+Kubernetes is an open source container orchestration platform that helps manage distributed, containerized applications at massive scale. You tell Kubernetes where you want your software to run, and the platform takes care of almost everything it takes to deploy and manage your containers.
+
+Kubernetes was originally developed and designed by engineers at Google—one of the early contributors to Linux container technology—before it was donated to the Cloud Native Computing Foundation (CNCF) in 2015. That means that the CNCF is the entity responsible for maintaining the Kubernetes community, while volunteer contributors and administrators are responsible for Kubernetes development, maintenance, and releases.

@@ -1,0 +1,58 @@
+what is Elastic Beanstalk
+=======================================================================================
+AWS Elastic Beanstalk is an easy to use service deploying and scaling web application and service.
+
+Elastic Beanstalk supported platforms for Go, Java,.net,Node.js,php,ruby,python,docker on familiar servers such as Apache, Nginx, Passenger and IIS.
+
+In Elastic Beanstalk (E)B we do not required to configure server environment.
+you can simply upload your code and Elastic Beanstalk automaticaly handles the deployment, from capacity provisioning, load balancing, auto-scaling to application health monitoring etc.
+
+just select what type application we want to deploy in environment automatically all files will install after some time.
+
+Ref:
+https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/Welcome.html
+https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/GettingStarted.CreateApp.html
+
+=======================================================================================
+
+Benefits of Elastic Beanstalk in AWS
+These are the following AWS Elastic Beanstalk benefits, let’s see them one by one:
+
+a. Flexible and Easy to Begin
+AWS made it easy to deploy the application on AWS. It can be done with the help of AWs Management Console, Visual Studio or Eclipse to upload your application. AWS EBSautomatically manages the deployment details of capacity provisioning, auto-scaling, and application health monitoring.
+
+b. Scaling the Demand
+Adjustable Auto scaling settings help Elastic Beanstalk to automatically scale the application. Your application can handle peaks in workload or traffic while minimizing your costs.
+For an instance to trigger Auto Scaling Actions one can use CPU Utilization Metrics. It also helps you to minimize the cost while keeping the application at the peak. 
+
+c. Control Over Tools
+AWS provides you the control over tools and resources such as Amazon EC2 instance type which is optimal for the application. AWS Elastic Beanstalk Management Capabilities helps us to take over the few or all the elements of the infrastructure. For, powering your application EBS allows full.
+
+d. Provides Productivity
+AWS EBS helps you to provide security, managing and configuring servers, managing database, load balancers, firewalls, and networks.
+===================================================================
+Customers of Amazon Elastic Bean Stalk
+
+Zillow
+Prezi
+BMW
+Jelly Button Games
+Speed League of Women Voters
+GeoNet
+Ivi Data Group and many more
+===================================================================
+Advantages of AWS Elastic Beanstalk
+
+AWS Elastic Beanstalk provides a cost-effective price in which you only have to pay for what you use and there are no hidden costs.
+
+Amazon Elastic BeanStalk builds the setup and configures. Moreover, it spectators the AWS services such as EC2, Elastic Load Balancers, RDS to create Web Services.
+
+Fast access is provided such that you can access the AWS management console in less than one hour.
+
+EBS creates a fairly standard configuration for modern railway applications.
+
+AWS Elastic Beanstalk supports Java, .NET, PHP, Node.js, Python, Ruby, Go, and many more web applications.
+
+SQL Server is configured through Amazon RDS but there is an EC2 server behind with a database running on it.
+
+===================================================================

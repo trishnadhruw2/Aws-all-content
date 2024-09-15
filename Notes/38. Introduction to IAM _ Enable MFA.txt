@@ -1,0 +1,36 @@
+IAM - Identity Access Management System
+
+AWS IAM is a web based service that provide secure control access to AWS resources to user. IAM control who is authenticated and authorized to use AWS available resources.
+IAM is a set of policies and technologies for ensure that proper user of orgnization have appropriate access to manage AWS services.
+
+when we create AWS account that time we create confirm and login into account using email id and password. AWS recommended orgnization never use the root user account for everyday task perform in AWS account.
+
+we can create IAM user account to manage the administrative task of your account and lock root user account to manage security of AWS account servies.
+
+we can create maximum 5000 AWS user account & 300 groups in single AWS account, we can add 10 user account at a same time, also create maximum 1000 IAM roles under AWS account
+
+
+default limit of Managed policies to attach to IAM role and IAM user is 10.
+
+IAM user can be a member of maximum 10 groups.
+we can assign maximum two access keys to IAM user.
+
+========================================================================================
+Modify user Name,email,passwords of root user:
+
+Login AWS via root user - click on user name - security credentials -password- click here - change/modify name,email and passwords - Done.
+
+Activate Multi-factor authentication (MFA):
+
+Login AWS via root user - click on user name - security credentials - Multi-factor authentication (MFA) -Activate MFA - Virtual MAF Device - Continue- Install Google Authenticator app in android device(using Playstore) - scan QR code of AWS page - type first MFA - Second MFA - Assign MFA.
+
+For remove MFA:
+Login AWS via root user - click on user name - security credentials - Multi-factor authentication (MFA) - Manage - remove - ok.
+
+========================================================================================
+Create User IAM:
+Login AWS account via root user - IAM (service) - Access Management - User - add user - user name (awsuser1) - Select AWS Access Type ( select Access Key and Password ) - Next: Permission - Next:tags - Next:Review - create user.
+========================================================================================
+========================================================================================
+========================================================================================
+========================================================================================

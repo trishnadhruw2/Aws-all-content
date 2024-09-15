@@ -1,0 +1,81 @@
+Lab: Create Load Balancer between two VPC (Application Load Balancer)
+=================================================================
+
+Create two VPC
+
+Step1: create first vpc
+------------------------------------------------------------------------------------
+VPC - Create VPC - myvpc1 -10.0.0.0/16 - create vpc - close 
+
+create first subnet
+Subnet - Create subnet - myvpc1-sub1 - vpc (myvpc1) - AZ- 1a - cidr- 10.0.1.0/24 - create.
+
+create second subnet -
+Subnet - Create subnet - myvpc1-sub2 - AZ- 1b - cidr-10.0.2.0/24 -create.
+
+Create Internet Gateway -
+Internet Gateway - create internet gateway (myvpc1-igw)- create- close - Action - Attach - attach to vpc - select (myvpc1)
+ 
+Create routing table
+rename default created routing table as a - myvpc1-route - routes - edit routes - 0.0.0.0/0 - internet gateway (myvpc1-igw) - save route - close - subnet associate - edit associate - select both subnet - save.
+
+=======================================================================================
+Step2: create second vpc
+
+VPC - Create VPC - myvpc2 -192.168.0.0/16 - create vpc - close
+
+create subnet
+Subnet - Create subnet - vpc2sub1 - vpc (myvpc2) - AZ- 1c - cidr- 192.168.1.0/24 - create.
+
+
+Create Internet Gateway -
+Internet Gateway - create internet gateway (myvpc2 -igw)- create- close - Action - Attach - attach to vpc - select (myvpc2)
+ 
+Create routing table
+rename default created routing table as a - myvpc2-route - routes - edit routes - 0.0.0.0/0 - internet gateway (vpc2-igw) - save route - close - subnet associate - edit associate - select created subnet - save.
+
+create Peering connection
+Peering - Create peering connection - myvpc1-myvpc2 - vpc requester (myvpc1) - vpc accepter - (myvpc2) - create peering connection - ok - Action - Accpet request - yes, accept - close.  
+
+Route Tables
+select myvpc2-route - Routes - edit routes - add route - 10.0.0.0/16 - Peering connection (myvpc1-myvpc2) - save route - close.
+
+now selcet myvpc1-route - Routes - edit routes - add route - 192.168.0.0/16 - Peering connection (myvpc1-myvpc2) - save route - close.
+
+==============================================================================
+Step3: Create EC2 Instance
+
+Create 1st EC2:
+EC2 - create instance - windows server 2016 - select myvpc1 - az -1a - auto assigne ip enable -  security group - ALL ICMP(icmp =0-65535) & http (tcp -80) - Launch instance.
+
+Create 2nd EC2:
+EC2 - create instance - windows server 2016 - select myvpc1 - az -1b - auto assigne ip enable -  security group - ALL ICMP(icmp =0-65535) & http (tcp -80) - Launch instance.
+
+Create 3rd EC2:
+EC2 - create instance - windows server 2016 - select myvpc2 - az -1b - auto assigne ip enable -  security group - ALL ICMP(icmp =0-65535) & http (tcp -80) - Launch instance.
+================================================================================================
+Give proper names to all running instances also write private ip 
+
+myvpc1-server1 = 10.0.0.107
+myvpc1-server2 = 10.0.1.182
+myvpc2-server1 = 192.168.0.151
+
+Access all servers by using RDP
+
+setup IIS web server on all servers and check it works or not using browser of physical system
+
+=========================================================================================
+Load Balancer
+
+Click on "Load Balancer" - Create Load Balancer - Application Load Balancer - create - Name (appbalancer) - Load balancer protocol -http - port 80 - vpc1  - select both AZ - myvpc1-sub1 and myvpc-sub2 - Next Security Settings - Next configure security groups - Assign a security group - create new security group - lbsecgp -  add icpm-ipv4 and http - next configure routing - Name (tg1)- target type (ip) - [protocol http] - Nex register target - Register target - add both ip private address of myvpc1 subnets - add to list.(add private ip address of instance)
+Now select "other private ip addess" (in network option) - ip  192.168.0.0 (myvpc2 -sub1 ip address) - add to list- next review - create - close.
+
+Target group - select tg1 - click on Targets - status (wait for status healthy).
+
+
+Load balancer - appbancer - DNS name (copy it) - paste in web browser - refresh web pages.
+
+
+Delet - load banlancer,ec2 instances and then myvpcs(with subnet,gateway etc)
+
+

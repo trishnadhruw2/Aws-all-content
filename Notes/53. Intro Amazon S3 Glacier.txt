@@ -1,0 +1,38 @@
+Amazon S3 Glacier storage:
+
+Long-term, secure, durable storage classes for data archiving at the lowest cost and milliseconds access
+
+The Amazon S3 Glacier storage classes are purpose-built for data archiving, providing you with the highest performance, most retrieval flexibility, and the lowest cost archive storage in the cloud. All S3 Glacier storage classes provide virtually unlimited scalability and are designed for 99.999999999% (11 nines) of data durability. The S3 Glacier storage classes deliver options for the fastest access to your archive data and the lowest-cost archive storage in the cloud.
+
+You can choose from three archive storage classes optimized for different access patterns and storage duration. For archive data that needs immediate access, such as medical images, news media assets, or genomics data, choose the S3 Glacier Instant Retrieval storage class, an archive storage class that delivers the lowest cost storage with milliseconds retrieval. For archive data that does not require immediate access but needs the flexibility to retrieve large sets of data at no cost, such as backup or disaster recovery use cases, choose S3 Glacier Flexible Retrieval (formerly S3 Glacier), with retrieval in minutes or free bulk retrievals in 5-12 hours. To save even more on long-lived archive storage such as compliance archives and digital media preservation, choose S3 Glacier Deep Archive, the lowest cost storage in the cloud with data retrieval within twelve hours.
+
+
+How much does Amazon S3 Glacier cost?
+S3 Glacier uses a pay-as-you-go pricing method, so organizations do not have to worry about buying more storage than they need. Amazon charges per gigabyte (GB) of data stored per month on Glacier and advertises the minimum cost of $4 per terabyte, per month, with additional costs associated with one of the three data retrieval options noted above.
+
+Although uploading data to Glacier is free, Amazon charges a fee for a retrieval request that is more than approximately 5% of the customer's average monthly storage. This is meant to discourage customers from using Glacier as a general online storage service.
+========================================================================================
+Data Retrieval in AWS Glacier is of three types:
+
+Expedited:
+This mode of data retrieval is only suggested for urgent requirements of data.
+A single expedited retrieval request can only be used to retrieve 250MB of data at max.
+This data is then provided to you within 1-5 minutes.
+The cost of expedited retrieval is $0.03 per GB and 0.01 per request.
+
+Standard:
+This data retrieval mode can be used for any size of data, full or partial archive.
+This data is then provided to you within 3-5 hours.
+The cost of standard retrieval is  $0.01 per GB and $0.05 per 1000 requests.
+
+Bulk:
+This data retrieval is suggested for mass retrieval of data (petabytes of data).
+It is the cheapest data retrieval option offered by AWS Glacier
+This data is then provided to you within 5-12 hours.
+The cost of bulk retrieval is 0.0025 per GB and 0.025 per 1000 requests
+========================================================================================
+
+
+
+
+

@@ -1,0 +1,9 @@
+What is S3 object storage?
+Object storage is a type of storage where data is stored as objects rather than blocks. This concept is useful for data backup, archiving, and scalability for high-load environments.
+
+Objects are the fundamental entities of data storage in Amazon S3 buckets. There are three main components of an object – the content of the object (data stored in the object such as a file or directory), the unique object identifier (ID), and metadata. Metadata is stored as key-pair values and contains information such as name, size, date, security attributes, content type, and URL.
+
+Each object has an access control list (ACL) to configure who is permitted to access the object. Amazon S3 object storage allows you to avoid network bottlenecks during rush hour when traffic to your objects stored on S3 cloud storage increases significantly. Amazon provides flexible network bandwidth but charges for network access to the stored objects. Object storage is good when a high number of clients must access the data (high read frequency). Search through metadata is faster for the object storage model.
+
+Buckets
+A bucket is a fundamental logical container where data is stored in Amazon S3 storage. You can store an infinite amount of data and unlimited number of objects in a bucket. Each S3 object is stored in a bucket. There is a 5 TB limitation for the size of one object stored in a bucket. Buckets are used to organize namespace at the highest level and are used for access control.

@@ -1,0 +1,40 @@
+what is Amazon DynamoDB
+DynamoDB is a fast and flexible NoSQL database service for all applications that need consistent, single-digit-millisecond latency at any scale. Its flexible data model and reliable performance make DynamoDB a great fit for mobile, web, gaming, advertising technology, Internet of Things, and other applications.
+
+Services - Database - DynamoDB - Create Table - Table name (Emp_Data) - Partition key (Emp_ID - Number) - Table settings (use default settings) - Create.
+
+Now Emp_Data table created successfully- overview ( show table details) - Explore table items - create item -   
+Emp_ID Number: 1
+(click on + - append -select String)
+Name string: Ajay
+(click on + - append -select Number)
+Age Number: 28
+(click on + - append -select Number)
+Salary Number: 65000
+(click on + - append -select String)
+(click on + - append -select List )
+Certification List:
+(click on + - append -select String)
+   0  String : RHCSA
+(click on + - append -select String)
+   1  String : RHCE
+(click on + - append -select String)
+   2  String : CCNA
+(click on + - append -select String)
+   3  String : AWS
+(click on + - append -select String)
+
+save.
+
+Now it show create table information
+
+Now above step repeat for other employee (dont add name )
+
+save.
+
+scan - it use to search,also use filter to search employee details (using Age,Name)
+
+query - it use search with primary key.(using Emp_ID)
+
+For delete table click on Delete Table.
+

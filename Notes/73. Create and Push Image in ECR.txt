@@ -1,0 +1,131 @@
+Step1: Create AMI Linux2 Instance
+
+Service - EC2 - create and start EC2 install of AMI Linux2 
+
+Access Instance with help putty using ec2-user
+
+=======================================================
+Step2: Install docker
+
+================================================
+
+Step1: Install docker in AMI Linux2022
+
+$sudo su
+#yum update -y
+#yum install docker
+#systemctl start docker
+#systemctl enable docker
+#systemctl status docker
+===============================================
+Step3:Create docker image
+
+#mkdir /Docker
+#cd /Docker
+
+#vim Dockerfile
+FROM httpd
+RUN echo "<html><head><title>Pune</title></head><body bgcolor=yellow><h1>Welcome to Mumbai website hosted on AWS ECS</h1></body></html>" > /usr/local/apache2/htdocs/index.html
+EXPOSE 80
+
+:wq
+
+===================================================
+Step4: Build and run image in container 
+
+#cd Docker
+#docker images
+#docker build -t myweb .   (-t for tag here)
+
+#docker images
+#docker ps
+#docker ps -a
+
+#docker run -dt -t -p 80:80 myweb
+#docker ps -a
+==============================================================
+Step5: For verify
+
+#curl localhost
+
+or
+
+Open web browser in physical os and try to open container web site
+
+http://18.0.0.23
+
+add port 80 in security group
+==================================================
+Step6: create IAM user
+
+Service - IAM - user - add user - user1 - (attach existing policty -AdministratorAccess) - Create user.
+
+Click on user name "user1" - security credentials - create access key - Command Line Interface (CLI) - i understand (access agreement) - Next - Create Access Key - "download csv file".
+
+==================================================
+Step7:
+Configure user created in above step in linux machine (EC2 Instance)
+
+#aws configure
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_DEFAULT_REGION= eu-west-2
+===============================================================
+Step8: Push Image into ECR
+
+Service - ECR - (here no repoistory created, create it using following command)
+
+To Create ecr repository and puch docker image using EC2 Instance
+
+$aws ecr create-repository --repository-name hello-repository --image-scanning-configuration scanOnPush=true  --region ap-south-1
+
+for verify above created repository -
+Service -ECR - Rpository - Refresh Page.
+
+Push commands for hello-repository
+
+#aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 148574222198.dkr.ecr.ap-south-1.amazonaws.com
+
+Build image form docker file
+#docker build -t hello-repository .
+
+Tag the image to push to your repository.
+#docker tag hello-repository:latest 664338771975.dkr.ecr.eu-west-2.amazonaws.com/hello-repository:latest
+
+push the image
+#docker push 664338771975.dkr.ecr.eu-west-2.amazonaws.com/hello-repository:latest
+
+now go to ECR service - Repositories - images
+
+======================================================================
+Step9:ECS
+Service -Amazon ECS - task defination - create new task definiation -Task definition family name (hello-task-demo) - Container-1 : container details - Name (hello-world-demo-container) Image URI (664338771975.dkr.ecr.eu-west-2.amazonaws.com/hello-repository:latest) (you got image uri path in ECR Repository) - Next- 
+
+Environment - CPU (.25vCPU) Memory (.5GB) (remove "use log collection" check box )- Next - Create.
+
+
+click on "cluster" - Create cluster - cluster name(cluster-demo)- create - click on "cluster-demo".
+
+Click on Cluster-demo - service - create - Launch type - FARGET - Deployment configuration (Task) -  Task definition - Family ( hello-task-demo) - Create.
+
+Click on Cluster-demo - Service - Tasks - click on tasks (details) - Network-binding (copy public IP) - open browser and paste it to access ECS hosted container website.
+
+
+allow traffic -http
+cluster- cluster-domo - configuration - click on (ENI ID) - seletec ENI ID - click on security group - add http in security group - save.
+=============================================================================================================
+For remove -
+
+Stop ALL tasks - delete cluster - deregister task defination - delete registry
+
+Official Steps:
+https://docs.aws.amazon.com/AmazonECR/latest/userguide/getting-started-cli.html
+ 
+
+
+
+
+
+
+
+

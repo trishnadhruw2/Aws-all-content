@@ -1,0 +1,66 @@
+\Lab:
+Create Network Load Balancer:
+=======================================================================================
+
+Step1: Create security group
+
+Services - EC2 - Security group - create security group (sec-grp-lb)- ICMP IPv4, http (tcp -80),ssh 22 - Create security group.
+
+=======================================================================================
+Step2: Create 3 Instances:
+
+Create 1st EC2:
+EC2 - create instance - Linux AMI2 - select default VPC - az -2a - auto assigne ip enable -  security group (sec-grp-lb) - Launch instance.
+
+Create 2nd EC2:
+EC2 - create instance - Linux AMI2 - select default VPC - az -2b - auto assigne ip enable -  security group (sec-grp-lb)- Launch instance.
+
+Create 3rd EC2:
+EC2 - create instance - Linux AMI2 - select default VPC - az -2c - auto assigne ip enable -  security group (sec-grp-lb)- Launch instance.
+
+
+Create all above instance with following bootstrap script - (Apache Webserver)
+
+#!/bin/bash
+sudo yum update -y
+sudo yum install httpd -y
+sudo systemctl start httpd
+sudo systemctl enable httpd
+sudo echo "<html><head><title>Goa</title></head><body bgcolor=yellow> <h1>Welcome to Webserver Goa</h1></body></html>" > /var/www/html/index.html
+sudo systemctl restart httpd
+
+Launch all instances and verify all working properly using web broswer.
+========================================================================================
+Step3: Create Target Group (Target means servers which handle load balancing)
+
+Services - EC2 - Load Balancing - Target Groups - Create Target Group - Choose a target type (Instances) - Target group name (wb-tg1) - protocol (TCP) - Port(80) - Next - Available Instances (select instances)Inclue as pending below - Create target group.
+=======================================================================================
+Step4: Create Load Balancer
+Services - EC2 - Load Balancing - Load Balancers - Create Load Balancer - Network Load Balancer - Name (web-lb) - Network  Mapping - VPC (Default) - Mappings (select 2a,2b,2c) - Security Group Create or select privious (sec-grp-lb) - Listeners and grouting - Protocol (tcp) - port (80) - Default action (select target group -(wb-tg1)) - Create Load Balancer.
+=======================================================================================
+Now wait for load balancer active status
+
+Target group - select web-tg1 - click on Targets - status (wait for status healthy).
+
+=======================================================================================
+Step5: For Verify
+Load balancer - web-lb- DNS name (copy it) - paste in web browser - refresh web pages.
+
+
+
+
+
+#!/bin/bash
+sudo yum update -y
+sudo yum install httpd wget unzip  -y
+sudo systemctl start httpd
+sudo systemctl enable httpd
+sudo wget https://www.free-css.com/assets/files/free-css-templates/download/page284/painter.zip
+sudo unzip  painter.zip
+sudo cp -rf painting-company-website-template/* /var/www/html/
+sudo echo "PermitRootLogin  yes" >> /etc/ssh/sshd_config
+sudo sed -i "/^[^P]*PasswordAuthentication[[:space:]]no/c\PasswordAuthentication yes" /etc/ssh/sshd_config
+sudo systemctl restart sshd
+sudo echo 111 | passwd  --stdin  root
+sudo echo 111 | passwd  --stdin  ec2-user
+sudo hostnamectl set-hostname server1

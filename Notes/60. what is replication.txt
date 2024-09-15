@@ -1,0 +1,31 @@
+what is replication
+
+Replication enables automatic, asynchronous copying of objects across Amazon S3 buckets. Buckets that are configured for object replication can be owned by the same AWS account or by different accounts. You can replicate objects to a single destination bucket or to multiple destination buckets. The destination buckets can be in different AWS Regions or within the same Region as the source bucket.
+
+To automatically replicate new objects as they are written to the bucket use live replication, such as Same-Region Replication (SRR) or Cross-Region Replication (CRR). To replicate existing objects to a different bucket on demand, use S3 Batch Replication. For more information about replicating existing objects, see When to use S3 Batch Replication.
+====================================================================================================
+Step1: Create bucket
+
+Bucket always create in global.
+
+Creatae bucket in London Region -
+Service - S3 bucket - Create Bucket - Bucket Name (my7mbucket1) - Region (london) - Bucket Settings for block public Access (remove check box of Block all public - i acknowledge tha the current settings) - Bucket Versioning (Enable) - Create Bucket.
+
+Creatae bucket in sydney region -
+Service - S3 bucket - Create Bucket - Bucket Name (my7mbucket2) - Region (sydney) - Bucket Settings for block public Access (remove check box of Block all public - i acknowledge tha the current settings) - Bucket Versioning (Enable) - Create Bucket.
+========================================================================================
+Step2: upload file in my7mbucket1
+upload 1 image - upload it.
+
+check this image also visible in my7bucket2?
+
+To replicate file in bucket Enable Replication 
+========================================================================================
+Step3: Enable Replication:
+Click on my7mbucket1 - Management - Replication rules -create replication rule - replication rule name (london-sydenyCRR) Status (enabled)- source bucket (my7mbucket1)- choose rule scope (Apply to all objects in bucket) -Destination (choose a bucket in this account) - bucket name(my7mbucket1) - IAM Role (create new role) -Save.
+Replicate Existing objects (No,do not) - submit.
+
+Now try to upload file in one bucket it will replication in another bucket.
+
+
+

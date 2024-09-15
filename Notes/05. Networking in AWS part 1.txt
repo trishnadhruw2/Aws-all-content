@@ -1,0 +1,51 @@
+what is network:
+connection between two and more than two computers is called computer network.
+
+Wire - coaxial,twisted paire,fiber optic
+Wireless-bluetooth,wifi
+-----------------------------------------------------------
+IP ( Internet Protocol ) Address -
+IP address provide unique identity of computer in network.
+Every one require ip address to join network.
+
+IPv4 - 32 bit
+IPv6 - 128 bit
+------------------------------------------------------------
+IPv4 Address -
+IPv4 is 32 bit address.
+we always ip address to computer in decimal computer understand it into binary.
+IP address divided into total 4 groups ( octed ), every have 8 bits, to divide ip use 3 (dots) .
+eg.
+Decimal		192.168.10.193
+Binary 		11000000.10101000.00001010.11000001	32 bit
+
+smallest 		0.0.0.0 [ 00000000.00000000.00000000.00000000 ]
+largest		255.255.255.255 [ 11111111.11111111.11111111.11111111 ]
+------------------------------------------------------------------------------------------------------------------
+IP Class
+Class		Range		use
+A		0 - 127		Big Networks	( 2^24=1.67 Cr )
+B		128 - 191		Medium Network      ( 2^16=2^16=65536)
+C		192 -223		Small Networks	( 2^H=2^8=256)
+D		224 - 239		reservied for multicasting or research purpose
+E		240 - 255
+
+Identify Class -
+
+192.160.10.5	C Class	
+10.100.200.250	A Class
+172.217.27.206	B Class
+-----------------------------------------------------------------------------------------------------------------------
+Subnet Mask:
+Subnet mask divide ip address into two parts, network address & host address ( Network (N=1)+Host (H=0) )
+
+Default Subnet Mask-
+
+Class	Range		Def.Sub.Mask	          Network + Host
+A	0- 127		255.0.0.0			8 + 24	
+B	128 - 191		255.255.0.0		16 + 16
+C	192 -223		255.255.255.0		24 + 8
+--------------------------------------------------------------------------------------------------------------------------
+IP Address of different Classes or Different Network can't communicate with each other without router.
+
+=================================================================================

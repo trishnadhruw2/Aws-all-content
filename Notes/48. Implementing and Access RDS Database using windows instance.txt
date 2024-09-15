@@ -1,0 +1,32 @@
+Implementing RDS Database instance in AWS and access using windows instance:
+=============================================================================
+Steps1:
+
+Create RDS Instance
+
+Services - RDS - Create database - choose a database creation method (Standard Create) - Engine Options - MySQL - Edition (mySQL community) - Version (MySQL 8.0.*) - Templates - Free tier - credentials settings - admin - master password (India123) -DB Instance class (default) - Storage - enable storage autoscaling (deselect) -  connectivity -public access (yes) - VPC security group - create new - New vpc security group name ( db-secgrp) - Monitoring - Additional configurations - Initial database name (mydb1) - Backup (deselect) - Create Database.
+
+Click on database-1 - connectivity & security - endpoint (copy it - required for access database)
+
+VPC security groups - select db-secgrp - Make sure that in db-secgrp enable mysql/auroa tcp 3306 anywhere.
+also add RDP tcp 3389 anywhere - save.
+========================================================================================
+
+Steps2: Create windows Instance
+
+Create and lauch windows server 2016 (security group - db-secgrp) launch instance - access it using RDP - Open server manager - local server  - off firewall for Domain/private/public network.
+
+also off "IE Enhanced security configuration" for administrator/users.
+
+Note: Above "web platform installer" expired from december 2022.
+for install mysql visite following site
+
+https://dev.mysql.com/downloads/file/?id=516926
+
+download and install mysql server - reboot computer ( if mysql command not run then set environmental variable path for mysql - search - environmental variable - edit environmental variable - environmental variable - system variable - path (select path ) - edit - new - paste path ( c:\programming files\mysql server8.0.32\bin) - ok.
+
+Now open command prompt
+
+mysql -h  <endpoint address paste here>  -u admin -p mydb1
+
+

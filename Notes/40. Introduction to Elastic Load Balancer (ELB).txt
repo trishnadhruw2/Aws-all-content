@@ -1,0 +1,29 @@
+ELB:
+Configuring application high availability with Elastic Load Balancer (ELB)
+Elastic Load Balancer has a public resolution DNS name to interface between client to available servers.
+It increase the availability and fault tolerence in your server.
+
+
+
+Elastic Load Balancer:
+Load balancer distribute the incomming traffic of the web server towards the available servers.
+
+Type of load balancer
+It generally divided into 3 types:
+1. Application Load Balancer
+2. Network Load Balancer
+3. Classic Load Balancer (Previous Gerneration)
+
+1. Application Load Balancer
+It work on OSI Model Application Layer (Layer 7)
+It support http/https protocol.
+
+2. Network Load Balancer
+It work on OSI Model Transport Layer (Layer 4)
+It support TCP/UDP/TLS
+
+3. Classic Load Balancer (Previous Gerneration)
+It work on OSI Model Transport and Application Layer
+It support http/https/TCP/UDP/SSL-TLS
+
+

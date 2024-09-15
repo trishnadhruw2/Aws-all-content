@@ -1,0 +1,24 @@
+What is ECS
+Amazon Elastic Container Service (ECS) is a highly scalable, high performance container management service that supports Docker containers and allows you to easily run applications on a managed cluster of Amazon Elastic Compute Cloud (Amazon EC2) instances.
+
+Amazon Elastic Container Service (ECS), also known as Amazon EC-2 Container Service, is a managed service that allows users to run Docker-based applications packaged as containers across a cluster of EC2 instances. Running simple containers on a single EC-2 instance is simple but running these applications on a cluster of instances and managing the cluster is being administratively heavy process. With ECS, Fargate launch type, the load, and responsibility of managing the EC2 cluster is transferred over to the AWS and you can focus on application development rather than management of your cluster architecture.
+
+AWS  Fargate is the AWS service that allows ECS to run containers without having to manage and provision resources required for running these applications.
+============================================================
+What is ECR
+Amazon Elastic Container Registry (Amazon ECR) is an AWS managed container image registry service that is secure, scalable, and reliable. Amazon ECR supports private repositories with resource-based permissions using AWS IAM.
+
+Amazon Elastic Container Registry (ECR) is a fully-managed Docker container registry that makes it easy for developers to store, manage, and deploy Docker container images.
+==========================================================
+What is an AWS ECS cluster?
+An Amazon ECS cluster is a logical grouping of tasks or services. If you are running tasks or services that use the EC2 launch type, a cluster is also a grouping of container instances. If you are using capacity providers, a cluster is also a logical grouping of capacity providers.
+=========================================
+what is farget
+AWS Fargate is a serverless, pay-as-you-go compute engine that lets you focus on building applications without managing servers. AWS Fargate is compatible with both Amazon Elastic Container Service (ECS) and Amazon Elastic Kubernetes Service (EKS).
+
+What is the difference between fargate and EC2?
+Amazon EC2 manages or deploy your own EC2 instances to run application effectively. With AWS Fargate, you may run containers without any need of EC2 instances. Both are wonderful techniques to manage or scale your containers in a reliable fashion but which service should you choose is always a tough task.
+==========================================================
+
+
+

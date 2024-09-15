@@ -1,0 +1,34 @@
+Create AMI Image of Running Instance
+-------------------------------------
+Step1:Lanuch Instance
+
+Open EC2 Instance - Windows Server 2016 Base - with default settings - launch Instance - access it using RDP Client.
+
+(save admin password)
+password: aJ9rs1QTYn=g%wLmaQr*xfm!xC-bx-ZD
+
+Login as Administrator user
+
+create folder for testing purpose in c drive or desktop.
+------------------------------------------------------------------------------------------------------
+Step3: Create Image
+
+Open EC2 Service - running instancess - select server - Action - Create Image & Template - Create Image - provide any name to image " My_WebServer" - Create Image. (Dont remove instance up to image status available in - Images -AMIs
+
+It also show in snapshots.
+
+Now delete running instance of windows server 
+------------------------------------------------------------------------------------------------------
+Step4: Copy AMI Image into Other region
+
+go to Service- EC2 - Images - AMIs - select image - Action - Copy Image - select destination Region (singapore)- Copy AMI.
+
+-----------------------------------------------------------------------------------------------------
+Step5: Launch server using AMI image
+
+Now go to singapore region - Service- EC2- Images - AMIs - wait for available - select Image - Launch instance from AMI - give Name - Windows-Server
+
+Now acess it using RDP and same password used in london region.
+verify all contents available which of created in london server.
+
+

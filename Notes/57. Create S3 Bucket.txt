@@ -1,0 +1,21 @@
+Create Amazon s3 Bucket:
+
+Service - Storage - S3 -Create Bucket - Bucket Name (7m-bucket) - Region ( Default ) - Bucket Settings for block public Access - (dont block for public) - Bucket versioning (enable) - Default encrytion (disable) - Create Bucket.
+
+Click on - 7m-bucket - create folder - folder name (mysoft) - create folder.
+
+Click on Folder - now we can upload file (test.txt)  - upload - close.
+
+now open test.txt file stored in local system - update file (add hello words) - save it.
+
+again goto s3 bucket - 7m-bucket -mysoft - upload file - select test.txt file from local system - upload - close.
+
+then go mysoft directory (in 7m-bucket) - click on "Show Version" - it show bucket preserve old version of file also.
+
+For download - select test.txt - click on download.
+
+For delete select test.txt - click on delete
+
+Delete 7m-bucket.
+
+ 

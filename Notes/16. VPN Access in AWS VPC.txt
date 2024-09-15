@@ -1,0 +1,81 @@
+What is VPN in VPC?
+A secure connection between your on-premises equipement and your VPCs. 
+VPN tunnel: An encrypted link where data can pass from the customer network to AWS. Each VPN connection includes two VPN tunnels which you can simultaneously use for high availability.
+======================================================================================================
+VPN Lab Steps:
+
+Step1: Create VPC
+Services - VPC - Create VPC -vpc only - Name (my-vpc) - 10.0.0.0/16 - create VPC.
+
+
+Step2: Create public Subnet (public-subnet)
+Subnet -Create Subnet - Name (public-subnet) - VPC (my-vpc) - Availability Zone (2a) - IPv4 CIDR Block (10.0.0.0/24) - Create subnet.
+
+Step3: Create private Subnet (private-subnet)
+Subnet -Create Subnet - Name (private-subnet) - VPC (my-vpc) - Availability Zone (2a) - IPv4 CIDR Block (10.0.1.0/24) - Create subnet.
+
+Step4: Create Internet Gateway
+Internet Gateway - Name (vpn-igw) - Action - Attach to VPC (my-vpc).
+
+Step5: Create route tables for public-subnet
+Click on Route Tables – Create Route Table – Name (my-routing) – VPC (my-vpc) –create route table - Subnet associations – edit subnet associations – select public-subnet – save association – routes – edit routes – add route – 0.0.0.0/0 – select internet gateway – save changes
+
+
+Step6: Create Instance (VPN Gateway Eshtablish)
+Services- EC2 - Launch Instance - Name (vpn-system) - Application and OS images ( Search - OpenVPN Access Server ) - Select - Continue - Instance Type (t2.micro) - Create paire name (vpn-keypaire (.ppk)) - Network Settings - edit - network (my-vpc) - Subnet (public-subnet) - AutoAssignPublicIP (enable) - Launch Instance.
+
+Step7: Launch windows server2016 EC2 Instance in private subnet:
+Services -EC2 - Launch Instance - Name (windows-server) - Windows server 2016- Network settings -edit - Network (my-vpc) - Subnet (private-subnet) - AutoAssignPublicIP (Disable) - Launch Instance - view Instance.
+
+Step8: Access vpn-system using putty
+Follow Same step like linux system access process.
+Login as : openvpnas
+agreement : yes
+press Enter for default[yes]: yes
+
+press default Enter,Enter & Enter for all default options.
+
+now set password for user (openvpn)
+$sudo passwd openvpn
+india123
+india123
+
+Now check 
+Admin UI:
+Client UI: https:11.23.143.9:943/
+
+copy client UI address and paste it into web browser.
+
+type login credentials
+username: openvpn
+password: india123
+
+
+login-go.
+
+Now Select - OpenVPN Connect for Windows - one file download automatically - open and install it.
+
+Step9: After install, right click on vpn icon connect - 
+username: openvpn
+password: india123
+
+click on yes.
+
+Step10: Access windows server2016 (private subnet).
+Follow same step like access windows server using RDP File.
+Cause of VPN we can access it using private IP.
+
+
+=============================================================================================
+Admin  UI: https://13.235.99.18:943/admin
+Client UI: https://13.235.99.18:943/
+To login please use the "openvpn" account with "bINxTJJYFM2L" password.
+
+
+
+Note:
+To resolve Error Code 2503/2502 using following link
+https://www.boxaid.com/blog/how-to-fix-2502-2503-errors/#:~:text=Why%20the%202502%20and%202503,you%20are%20going%20to%20get.
+
+open vpn subscription fail, then use following link
+https://aws.amazon.com/marketplace/pp/prodview-y3m73u6jd5srk

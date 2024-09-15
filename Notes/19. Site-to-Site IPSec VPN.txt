@@ -1,0 +1,135 @@
+What is AWS site-to-site VPN?
+AWS Site-to-Site VPN is a fully-managed service that creates a secure connection between your data center or branch office and your AWS resources using IP Security (IPSec) tunnels.
+
+Instancess created and launch into Amazone VPC cant communicate with your own network. To create secure communication between own network and amazone VPC  we required site to site VPN connection.
+
+VPN Connection: 
+A secue connection between our own network to your VPC created on AWS.
+
+VPN Tunnel:
+A encrypted link where data can pass from the customer network to or form AWS each VPN connection includes two VPM tunnel which you can simulteneouly use for high security.
+
+Customer Gateway:
+An AWS resource which provide information to AWS about you customer gateway device.
+
+Customer Gateway Device:
+A physical device or software app on customer side.
+
+
+
+Steps to create VCP:
+
+Create Two VPC one in London and one in tokiyo
+
+=======================================================================================
+Step1: Create VPC
+
+create VPC -  AWS-London - ipv4 10.1.0.0/16 create
+
+now create subnet - AWS-london-subnet - ipv4 cidr block 10.1.0.0/24 - creat subnet.
+
+Create internet gateway- igw-london- action -attach.
+
+Create route table - london-routing - create.
+
+route table - 0.0.0.0/0 internet gateway(igw-london) - save
+subnet association - select -save
+======================================================================================
+Now come tokiyo region - select region -right click - open new tab-
+
+create vpc - customer-vpc - 10.2.0.0/16 create
+create subnet - customer-subnet - customer-vpc - 10.2.0.0/24
+create internet gateway - igw-customer - action - attach.
+create routing table -customer-routing- 0.0.0.0/0  - igw-customer - save
+subnet association - select subnet -save.
+
+Create ec2 instance(tokiyo) - launch instance - AMI LINUX2 - select customer-vpc - select subnet- enable ip - create security group - customersecgrp - add 
+All ICMP-IPv4 -protocol (icmp) - port range (0-65535) - anywhere
+ALL TCP - protocol (TCP) -  port range (0-65535) - anywhere
+
+create security key- ppk
+
+review and launch.
+
+=====================================================================================
+Go to London Region - 
+
+click on VPC - Virtual Private Network- Virtual Private Gateway - Create Virtual Private Gateway - Name tag(london-igw-vpg)- Create Virtual Private Gateway- action -attach -attach to vpc(AWS-london).
+
+click on VPC - Virtual Private Network- Customer Gateway - create customer gateway - cg-london - static - ip address - 19.0.24.4 (public ip of tokiyo vpc ec2 instance) - create customer gateway - close.
+
+click on VPC - Virtual Private Network- site to site vpn connection - create vpn connection - london-tokiyo  - Target gateway type- virtual private gateway -(london-igw-vpg) - customer gateway - existing - customer gateway id- cg-london  -  routing option -static- static ip prefix - 10.2.0.0/16(tokiyo VPC (customer-vpc)) - create vpn connection.
+
+route table - route propogation - edit route propogration - select (london-igw-vpg) -enable- save.
+
+click on - site to site vpn connection - wait for available state - download configuration - vendor - Generic - Download. 
+
+===============================================================================
+Tokiyo Region - 
+Access ec2 instance using putty - login -ec2-user
+
+$sudo su
+#yum install openswan -y
+#vim /etc/ipsec.conf
+ensure following line uncommented
+
+include /etc/ipsec.d/*.conf
+
+:wq
+
+#vim /etc/sysctl.conf
+go to end of the file
+
+net.ipv4.ip_forward = 1
+net.ipv4.conf.all.accept_redirects = 0
+net.ipv4.conf.all.send_redirects = 0
+
+:wq
+
+#service network restart
+#vim /etc/ipsec.d/aws-vpn.conf
+conn Tunnel1
+        authby=secret
+        auto=start
+        left=%defaultroute
+        leftid=65.2.189.94
+        right=18.132.80.43
+        type=tunnel
+        ikelifetime=8h
+        keylife=1h
+        phase2alg=aes128-sha1;modp1024
+        ike=aes128-sha1;modp1024
+        keyingtries=%forever
+        keyexchange=ike
+        leftsubnet=10.2.0.0/16
+        rightsubnet=10.1.0.0/16
+        dpddelay=10
+        dpdtimeout=30
+        dpdaction=restart_by_peer
+:wq
+
+#vim /etc/ipsec.d/aws-vpn.secrets
+customer_public_ip aws_vgw_public_ip: PSK "shared secret"
+or
+<customer gateway> <virtual private gateway>: PSK <pre-shared key>
+eg.
+65.2.189.94 18.132.80.43: PSK "dZm1rltm9efUBqyb_4NavfvC8gcf2_7m"
+:wq
+
+Commands to enable/start ipsec service
+           # chkconfig ipsec on
+           # service ipsec start
+           # service ipsec status
+
+create ec2 instance london vpc - london server - ami linux2 - launch instance= select vpc & subnet - subnet - enable ip - security group - anywhere
+All ICMP-IP -protocol (icmp) - port range (0-65535) - anywhere - launch instance.
+
+come tokiyp - ec2 instance -
+#ping <london ec2 ipv4 private ip>
+
+
+
+
+
+
+

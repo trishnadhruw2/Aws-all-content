@@ -1,0 +1,52 @@
+Host Static website in s3 Bucket:
+
+==========================================================
+Step1: Create sample webpage on desktop (index.html)
+
+<html>
+<head><title>Pune</title></head>
+<body bgcolor=yellow>
+<h1>Welcome to pune website hosted in s3 bucket</h1>
+</body>
+</html>
+
+save with index.html extension.
+==========================================================
+Step2: Create bucket
+
+Service - S3 bucket - Create Bucket - Bucket Name (seven-mentor-pune) - Region (Default) - Bucket Settings for block public Access (remove check box of Block all public - i acknowledge tha the current settings) - Bucket Versioning (Enable) - Create Bucket.
+==========================================================
+Step3: upload web contents
+
+
+click on bucket(seven-mentor-pune) - upload - add files (upload website files fom desktop) - click on upload - Close.
+==========================================================
+Step4: Static website hosting
+
+click on bucket(seven-mentor-pune) -properties - static website hosting (edit) - enable - hosting type (host a static website) - Index document (index.html) - Error Document (error.html) - save changes. 
+
+==========================================================
+Step5: create policy for public access
+
+click on bucket(seven-mentor-pune) Pemission - Bucket Policy - edit - click on add a new statement. 
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowGet Access",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::seven-mentor-pune/*"
+        }
+    ]
+}
+
+Save Changes.
+======================================================================================
+Step5: Open website using url
+
+click on bucket(seven-mentor-pune) - select index page -copy url and paste in browser.
+
+Website will be open.

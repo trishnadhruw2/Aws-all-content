@@ -1,0 +1,24 @@
+What is Amazon CloudWatch?
+
+Amazon CloudWatch monitors your Amazon Web Services (AWS) resources and the applications you run on AWS in real time. You can use CloudWatch to collect and track metrics, which are variables you can measure for your resources and applications.
+You can create alarms that watch metrics and send notifications or automatically.
+======================================================================================================
+Monitor EC2 Instances:
+
+You can monitor your instances using Amazon Monitor your instances using CloudWatch.
+CloudWatch, which collects and processes raw data from Amazon EC2 into readable, near real-time metrics. These statistics are recorded for a period of 15 months, so that you can access historical information and gain a better perspective on how your web application or service is performing.
+
+By default, Amazon EC2 sends metric data to CloudWatch in 5-minute periods. To send metric data for your instance to CloudWatch in 1-minute periods, you can "enable detailed monitoring" on the instance.
+The Amazon EC2 console displays a series of graphs based on the raw data from Amazon CloudWatch. 
+
+======================================================================================================
+Metrics:
+ Metrics are the fundamental concept in CloudWatch.
+Metrics are data about the performance of your systems. 
+By default, many services provide free metrics for resources (such as Amazon EC2 instances, Amazon EBS volumes, and Amazon RDS DB instances). You can also enable detailed monitoring for some resources, such as your Amazon EC2 instances, or publish your own application metrics. Amazon CloudWatch can load all the metrics in your account (both AWS resource metrics and application metrics that you provide) for search, graphing, and alarms.
+
+Metric data is kept for 15 months, enabling you to view both up-to-the-minute data and historical data.
+======================================================================================================
+Amazon SNS:
+Amazon Simple Notification Service (Amazon SNS) coordinates and manages the delivery or sending of messages to subscribing endpoints or clients. You use Amazon SNS with CloudWatch to send messages when an alarm threshold has been reached.
+======================================================================================================

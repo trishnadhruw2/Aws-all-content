@@ -1,0 +1,27 @@
+Create Glacier Vault,upload and download data in Glacier Vault
+========================================================================================
+Step1 : Create Vault:
+
+Service - S3 Glacier - create Vault - Region (select Region -London ) - Vault Name (my-vault) - Next - create
+========================================================================================
+Step2: Download Fast Glacier:
+
+now download fast glacier tool and install it.
+
+https://fastglacier.com/download.aspx
+========================================================================================
+
+Step3: Create IAM user account:
+Instead of root user credential we create another user account to upload data in glacier.
+
+Service - IAM - user - add user - add administrative full access to user - create user - download CSV file -close.
+Open downloaded file copy and add Access/Secrete key in fast Glacier - then click on add account.
+========================================================================================
+Step4: Fast Glacier Show all region and available vaults
+Go in London Region - my-vault - click on Upload - Select file or folder to upload - upload it.
+========================================================================================
+Step5: Download Data (Retrial Data):
+Open Fast Glacier - Select Region( London ) - select Vault ( my-vault ) - select file which we want download - then Confirm Data retrieval option (Expendited,Standard,Bulk) -Confirm Data Retrieval.
+
+Wait for few min data will be downloaded on selected location.
+========================================================================================

@@ -1,0 +1,51 @@
+What is object lock on S3?
+Object Lock can help prevent objects from being deleted or overwritten for a fixed amount of time or indefinitely. You can use S3 Object Lock to meet regulatory requirements that require WORM(write once read many) storage, or add an extra layer of protection against object changes and deletion.
+=========================================================================================
+S3 Object Lock legal hold:
+The Object Lock legal hold operation enables you to place a legal hold on an object version. Like setting a retention period, a legal hold prevents an object version from being overwritten or deleted. However, a legal hold doesn't have an associated retention period and remains in effect until removed.
+=========================================================================================
+For lock object with specific or  indefinite time with following mode:
+
+Retention Modes:
+Governance Mode - 
+user cant overwrite or delete an object versions alter its settings unless the have special permission
+
+Compliance mode - 
+A protected object version cant be overwritten or deleted by any user, including the root user also.
+=========================================================================================
+Step1: Create Bucket
+
+Service - S3 bucket - Create Bucket - Bucket Name (my7mbucket) - Region (london) - Bucket Settings for block public Access (remove check box of Block all public - i acknowledge tha the current settings) - Bucket Versioning (Enable) - advance settings - Object Lock -enable (click on i ack) - Create Bucket.
+
+=========================================================================================
+Step2: S3 Object Lock legal hold
+
+click on my7mbucket - upload 3 files - upload. 
+
+click on file1 - go to bottom - object lock legal hold-edit- enable - save changes - then try to delete file1 - we cant delete it.
+
+now click on file1 again and disable file1 legal hold.
+
+try to delete now,it will delete.
+=========================================================================================
+Step3: Governance Mode-
+
+again click on file2 - go to botoom- click on object lock retension - edit - select mode (Governance Mode)- save changes.
+
+try to delete- it will delete cause we login through root user.
+
+now click on file2 again and disable governance mode.
+
+=========================================================================================
+Step4: Compliance mode-
+
+again click on file3 - go to botoom- click on object lock retension - edit - select mode (Compliance mode)- save changes.
+
+try to delete- it will fail to delete to root also before complete retension period.
+
+wait for retension period completed to delete it.
+
+
+
+
+

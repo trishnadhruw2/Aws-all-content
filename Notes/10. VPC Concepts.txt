@@ -1,0 +1,197 @@
+VPC [Virtual Private Cloud]:
+
+Amazon Virtual Private Cloud (Amazon VPC) enables you to launch AWS resources into a virtual network that you've defined. This virtual network closely resembles a traditional network that you'd operate in your own data center, with the benefits of using the scalable infrastructure of AWS.
+
+Amazon VPC is the AWS Virtual Private Cloud. A VPC logically separates your virtual network from all other AWS customers and from the internet. Think of it as a container for all the networking that you do when running on AWS.
+
+- A Virtual Private Cloud is like a private network which create on a cloud.
+- It is a logically isolated network from other network which created in a cloud.
+- Amazon VPC enables you to build a virtual network in the AWS cloud - no VPNs, hardware, or physical datacenters required. You can define your own network space, and control how your network work.
+- We can create maximum 5 VPC (one region) and each VPC can have 200 setup subnet.
+- When we create VPC then DHCP,Security Group and NACL created automatically.
+=============================================================
+Type of VPC:
+1. Default VPC
+2. Custom VPC
+
+1. Default VPC
+- It present bydefault in every region of AWS
+- It by default have CIDR,Security Group, NACL and other routing table configuration.
+- It also have defult gateway
+
+2. Custom VPC:
+- we can create custome VPC as per out requirement(with custom CIDR)
+- Security Goup, NACL and other routing table created bydefault at time of VPC creation.
+- it does not have internet gateway,we need to create manualy if required
+
+===================================================================================
+Type of subnet
+
+Public Subnet-
+Basically public subnet connected with internet,
+It is connected with internet gateway. means system attached in public subnet directly can communicate with internet.
+
+Private Subnet:
+private susbnet not connected with internet gateway.
+It is not connected with internet gateway, means system attached in private subnet does not directly communicate with internet.
+===================================================================================
+VPC & Subnet Creation rule:
+
+When we create VPC, we need to assign ip address and CIDR(prefix/network bit) to VPC.
+AWS VPC allow us to create CIDR from 16 to 28 Range.
+
+eg. 
+If we create VPC = 10.0.0.0/25  ( Then we got total 2^7=128 IP address)
+
+Inside VPC we need to create Subnets, when we create subnet 5 ip address reserved,  means 5 ip address reduce from subnet block size for following purpose -
+
+- First 4 ip and last 1 is reserved (Total 5 IP Reserved)  ( subnet = 10.0.0.0/26)
+----------------------------------------------------------------------------------------------
+1. First IP Reserved for Network ID 		= 10.0.0.0 
+
+2. AWS Reserved 2nd IP for Router (Gateway) 	=10.0.0.1 
+
+3. AWS Reserved 3rd IP for DNS Server 		=10.0.0.2
+
+4. AWS Reserve 4th IP for future usage 		 =10.0.0.3
+
+5. Last IP address reserved for Broadcast		 =10.0.0.63
+---------------------------------------------------------------------------------------------
+Eg.
+
+VPC = 10.0.0.0/22
+Network Bit (N) 	= 22 
+Host  Bit  (H) 	= 10
+
+2^H= 2^10 = 1024  
+
+In above VPC we got total host 1024 (Block Size)
+
+Now we can create subnet inside  10.0.0.0/22 VPC.
+
+we create 4 subnet,
+1024/4 = 256 ( 8 host bit )
+
+Sub IP		10.0.0.0		10.0.1.0		10.0.2.0		10.0.3.0
+F.V.  IP		10.0.0.4		10.0.1.4		10.0.2.4		10.0.3.4
+LV.  IP		10.0.0.254	10.0.1.254	10.0.2.254	10.0.3.254
+Bro IP		10.0.0.255	10.0.1.255	10.0.2.255	10.0.3.255
+-----------------------------------------------------------------------------------------------------------------------------------
+Wipro company required 2 subnet ( account_subnet = 25 valid host & market_subnet= 25 valid host )
+
+1. Idenfiy Host Bit for Subnet
+2^H= 2^5= 32 ( block size)
+
+Valid Host
+2^H-5 = 32-5 = 27 
+
+so we require 32+32 = 64 block size for both subnet means total 64   IP. (2^6= 64)
+Now create VPC,
+
+VPC =  10.0.0.0/26 
+
+After Create VPC,
+create subnet now,
+
+Subnet1 (account_subnet ) = 10.0.0.0/27
+Subnet2 (marketing_subnet ) = 10.0.0.32/27
+---------------------------------------------------------------------------------------------------------------------
+TCS orgnization required 4 subnet with 50 valid host for each subnet.
+
+64+64+64+64 = 256
+
+VPC = 10.0.0.0/24
+
+subnet1 = 10.0.0.0/26
+subnet2  = 10.0.0.64/26
+subnet3 = 10.0.0.128/26
+subnet4 = 10.0.0.192/26
+
+=============================================================================
+Infosys required 4 subnet with 500 valid host for each subnet
+
+512+512+512+512= 2048
+
+VPC = 10.0.0.0/21
+
+subnet1 = 10.0.0.0/23
+subnet2  = 10.0.2.0/23
+subnet3 = 10.0.4.0/23
+subnet4 = 10.0.6.0/23
+================================================================================
+HP required 8 subnet with 100 valid host for each subnet
+
+128 * 8 = 1024
+
+VPC = 10.0.0.0/22
+
+subnet1 = 10.0.0.0/25
+subnet2  = 10.0.0.128/25
+subnet3 = 10.0.1.0/25
+subnet4 = 10.0.1.128/25
+subnet5 = 10.0.2.0/25
+subnet6  = 10.0.2.128/25
+subnet7 = 10.0.3.0/25
+subnet8 = 10.0.3.128/25
+==================================================================================
+FBI require 10 subnet with 10 valid host for each subnet
+
+16*10 = 160
+
+VPC= 10.0.0.0/24
+
+subnet1 = 10.0.0.0/28
+subnet2  = 10.0.0.16/2
+subnet3 = 10.0.0.32/28
+subnet4 = 10.0.0.48/28
+.
+.
+.
+subnet10 = 10.0.0.144/28
+===================================================================================
+192.168.0.0/24
+
+create two subnet
+192.168.0.0/25
+192.168.0.128/25
+
+Total Host (Block Size) = 2^H = 2^7 128
+Valid Host = 2^H-5 = 128-5 = 123
+
+1st IP reserved for network ip
+2nd IP reserved for router ip
+3rd IP reserved for DNS  ip
+4th IP reserved for future purpose
+5th IP reserved for broadcast
+
+subnet table -
+sub ip		192.168.0.0		192.168.0.128
+fv   ip		192.168.0.4		192.168.0.132
+lv  ip		192.168.0.126		192.168.0.254
+bro ip		192.168.0.127		192.168.0.255
+--------------------------------------------------------------------------------------------------------------------
+192.168.0.0/24
+create 4 subnet -
+
+subnet table -
+sub ip		192.168.0.0	192.168.0.64	192.168.0.128	192.168.0.192	
+fv   ip		192.168.0.4	192.168.0.68	192.168.0.132	192.168.0.196
+lv   ip		192.168.0.62	192.168.0.126	192.168.0.190	192.168.0.254
+bro ip		192.168.0.63	192.168.0.127	192.168.0.191	192.168.0.255
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

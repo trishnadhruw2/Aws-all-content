@@ -1,0 +1,35 @@
+AWS Storage Services
+Amazon Web Services (AWS) provides low-cost data storage with high durability and high availability. AWS offers storage choices for backing up information, archiving, and disaster recovery.
+
+We have compiled a list of the main storage services available on the AWS Cloud, as follows:
+
+Amazon Simple Storage Service (Amazon S3)
+Amazon s3 Glacier
+Amazon Elastic File System (Amazon EFS)
+Amazon Elastic Block Store (Amazon EBS)
+AWS Storage Gateway
+AWS Snowball
+Amazon CloudFront
+
+1. Simple Storage Service (S3)
+Amazon S3 is an object storage service that stores data of any type and size. It can store data for any business such as web applications, mobile applications, backup, archive, analytics. It also provides easy access control management for all your specific requirements and is almost 100% durable and by almost I mean 99.(11 nines)%. It can also be used to store all kinds of file formats as you would with a dropbox. S3 also allows a simple web-based file explorer to upload files, create folders or delete them.
+
+2. Elastic Block Storage (EBS)
+EBS provides block storage which is similar to hard drives to store any kind of data persistently. This can be attached to any EC2 instance and used as block storage, which even allows you to install any operating system. EBS volumes are placed in availability zones so that they are replicated to prevent loss of data due to single component failures. They provide absolute low-latency performance and you can also scale up or down your resources as and when required. EBS is available in both SSD and HDD formats depending on your requirement of speed and volume.
+
+3. Elastic File System (EFS)
+EFS is a managed network file system that is easy to set up right from the amazon console or CLI. When you have multiple EC2 instances needed to access the same file system EFS helps in providing just that. Unlike EBS, EFS is built using the NFS4.x protocol on SSDs and have a much faster throughput. This also means that EFS is much more expensive than EBS as it can be used on very large analytical workloads. EFS scales up or down based on the size of the files you store and is also accessible from multiple availability zones. The distributed nature of the file system can tempt you to use it as a CDN. But the costs of a CDN outweigh the benefits of using EFS. Hence it is better to use a CDN and use EFS in conjunction with files that can’t be stored on a CDN.
+
+4. Amazon S3 Glacier
+The glacier is used mainly for archival and long-term data storage. This means that there is a low retrieval rate on this storage system due to which it is offered at an extremely cheap rate. It does also come with compliant security features to encrypt your data. Glacier allows you to run queries and analytics on it directly and you will be charged only for the few minutes or hours when you read the data. In terms of durability, it offers 99.(11 nines)% durability which is one of the highest in the industry. Glacier hopes to replace the legacy on-premise tape-based backup service with a much more cost-effective and durable solution.
+
+5. AWS Storage Gateway
+
+Storage Gateway is a simple way to let your on-premise applications store, access or archive the data into the AWS cloud. This is achieved by running on a hypervisor on one of the machines in your data center which contains the storage gateway and then is available on AWS to connect to S3, Glacier or EBS. It provides a highly optimized, network resilient and low-cost way to move your data from on-prem to the cloud. Local caching is also available on your on-prem to allow for accessing the more active data. Storage gateway also supports legacy backup stores such as tapes as virtual tapes backed up directly into AWS Glacier.
+
+6. AWS Snowball
+The AWS Snowball service uses physical storage devices to transfer large amounts of data between Amazon Simple Storage Service (Amazon S3) and your onsite data storage location at faster-than-internet speeds. By working with AWS Snowball, you can save time and money. Snowball provides powerful interfaces that you can use to create jobs, track data, and track the status of your jobs through to completion.
+
+7. Amazon CloudFront
+Amazon CloudFront is a web service that gives businesses and web application developers an easy and cost effective way to distribute content with low latency and high data transfer speeds.
+Amazon CloudFront speeds up distribution of your static and dynamic web content, such as .html, .css, .php, image, and media files. When users request your content, CloudFront delivers it through a worldwide network of edge locations that provide low latency and high performance

@@ -1,0 +1,96 @@
+Amazon CloudFront:
+Securely deliver content with low latency and high transfer speeds.
+Amazon CloudFront is a content delivery network (CDN) service built for high performance, security, and developer convenience.
+
+There was a time when having an own Content Delivery Network was extremely rare for companies due to its high costs and complicated IT infrastructure. But now, AWS CloudFront has helped users to request data resulting in low latency, low network traffic, and quick data access with minimal cost. Thus, making it a very popular network.
+
+AWS CloudFront is a globally-distributed network offered by Amazon Web Services, which securely transfers content such as software, SDKs, videos, etc., to the clients, with high transfer speed.
+
+-----------------------------------------------------------------------------------
+Benefits of AWS CloudFront
+
+-It will cache your content in edge locations and decrease the workload, thus resulting in high availability of applications.
+-It is simple to use and ensures productivity enhancement.
+-It provides high security with the ‘Content Privacy’ feature.
+-It facilitates GEO targeting service for content delivery to specific end-users.
+-It uses HTTP or HTTPS protocols for quick delivery of content.
+-It is less expensive, as it only charges for the data transfer.
+
+-------------------------------------------------------------------------------------
+To view current edge locations
+https://aws.amazon.com/cloudfront/features/?icmpid=docs_console_unmapped&whats-new-cloudfront.sort-by=item.additionalFields.postDateTime&whats-new-cloudfront.sort-order=desc#Global_Edge_Network
+
+To deliver content to end users with lower latency, Amazon CloudFront uses a global network of 410+ Points of Presence (400+ Edge locations and 13 regional mid-tier caches) in 90+ cities across 48 countries. Amazon CloudFront Edge locations are located in:
+======================================================================================
+Lab Steps:
+
+Step1: Create Bucket
+
+Service - S3 bucket - Create Bucket - Bucket Name (sevenmentor) - Region (london) - Bucket Settings for block public Access (remove check box of Block all public - i acknowledge tha the current settings) - Bucket Versioning (Enable) - Create Bucket.
+======================================================================================
+Step2: Upload content & share publicaly (image or video)
+
+create policy for public access
+
+click on bucket(sevenmentor) Pemission - Bucket Policy - edit - click on add a new statement. 
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowGet Access",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::my-aws-london-bucket1/*"
+        }
+    ]
+}
+
+Save Changes. 
+
+
+try to open publicaly and verify its working
+======================================================================================
+Step3: create distribution.
+
+Service - cloudfront - distribution - create a distribution - origin domain name - select created bucket(sevenmentor.s3.amazoneaws.com) - other settings leave default as it is - create distribution.
+
+wait for complete deploying process. 
+======================================================================================
+Step4:
+
+click on Cloudfront - Distributions- click on created distribution name (EEJLPEBGMZEY4) - copy (Distribution domain name)
+
+go to web browser - paste (copied domain name with image or video name ) it in url filed press enter
+
+https://dvorlmp8e7u17.cloudfront.net/aws.mp4
+or 
+https://dvorlmp8e7u17.cloudfront.net/aws.jpg
+
+when we above s3 object it will be open customer quickly form near edge location cache.
+
+========================================================================================
+For remove lab
+
+disable - distribution - wait disable process-  then delete distribution.
+
+empty bucket and delete it.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,14 @@
+Create VPC/subnet for aws
+==========================================
+1. Create VPC - punevpc (192.168.0.0/?)
+
+ Create 4 subnet, each subnet should have 50 valid host.
+------------------------------------------------------------------------
+2. Create VPC - mumbaivpc ( 10.0.0.0/?)
+
+Create 2 subnet, each subnet should have 500 valid host
+-----------------------------------------------------------------------
+3. Create VPC - wiprovpc ( 192.168.0.0/?)
+
+Create 3 subnet, each subnet should have 120 host
+

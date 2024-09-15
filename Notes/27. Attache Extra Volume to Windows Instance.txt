@@ -1,0 +1,34 @@
+Attach extra volume to EC2 Instance (Windows Server 2016)
+======================================================================================================
+Step1: Create and Launch Instance
+----------------------------------
+
+Step1:Lanuch Instance
+
+Open EC2 Instance - Windows Server 2016 Base - add storage add new volume -select 10 GB volume - magnetic - add volume- with default settings - launch Instance - access it using RDP Client.
+--------------------------------------------------------------------------
+Step2: Login as Administrator user
+
+Open -start menu - computer - here show 2 volume c and d drive.
+Note:
+Newly added 10GB disk unformated or RAW drive,it not show in my computer.
+
+For Initialize and create FS
+go to start menu - Server Manager (mycomputer right click- manange )- File and Storage Service - Disk - select 10GB disk - right click - bring online - yes- again select disk -right click -initialize - yes- again select disk - right click - Create volume - next - next - next -next -next - close.
+
+goto Mycomputer and verify D drive available to use.
+=====================================================================================================
+
+Step3: Create one more volume (disk partition)
+
+goto Service - EC2- EBS - Volumes - Create Volume - 25 GB - Magnetic Volume -(ensuer create volume and running instance AZ should same) create volume- Action - attach volume.
+
+
+Step4: go to RDP -
+
+
+For Initialize and create FS
+go to start menu - Server Manager (mycomputer right click- manange )- File and Storage Service - Disk - select 25GB disk - right click - bring online - yes- again select disk -right click -initialize - yes- again select disk - right click - Create volume - next - next - next -next -next - close.
+
+Open MyComputer and check E disk also available to use.
+

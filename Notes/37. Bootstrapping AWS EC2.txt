@@ -1,0 +1,86 @@
+What is bootstrapping in AWS :
+In aws bootstrapping means add command or script when start ec2-instance in user data section,that script executed at time of ec2 booting/starting process.
+It is one of best way of learn automation.
+
+Bootstrapping AWS EC2 instance to update packages, install and start Apache HTTP Server. Bootstrapping in AWS simply means to add commands or scripts to AWS EC2's instance User Data section that can be executed when the instance starts. It is a good automation practice to adopt to ease configuration tasks.
+
+Setup boot Script- 
+Create New Instance of Amazon linux- click on advance details - user data - write following script to install web server 
+
+We are create here booting script/bootstrap script -
+Steps for apache webserver- hosting on AMI Linux 2/2023:
+
+#!/bin/bash
+sudo yum update -y
+sudo yum install httpd -y
+sudo systemctl start httpd
+sudo systemctl enable httpd
+sudo echo "<html><head><title>pune</title></head><body bgcolor=yellow> <h1>Welcome to pune website</h1></body></html>" > /var/www/html/index.html
+sudo systemctl restart httpd
+
+launch Instance.
+
+After launching instance verify install start with apache sample website.
+
+====================================================================================
+Steps for apache webserver- hosting onUbuntu Server 22.04:
+
+#!/bin/bash
+sudo apt update -y
+sudo apt install apache2 -y
+sudo systemctl start apache2 
+sudo chmod 777 /var/www/html
+sudo rm -rvf /var/www/html/index.html
+sudo echo "<html><head><title>apache</title></head><body bgcolor=skyblue> <h1>Welcome to apache website</h1></body></html>" > /var/www/html/index.html
+sudo chmod 755 /var/www/html
+============================================================================================
+
+Amazon-Linux2023
+
+#!/bin/bash
+sudo yum update -y
+sudo yum install httpd -y
+sudo systemctl start httpd
+sudo systemctl enable httpd
+sudo echo "<html><body bgcolor=pink><h1>Wecome to Apache Webserver</h1></body></html>" > /var/www/html/index.html
+sudo systemctl restart httpd
+==================================================================
+Amazon-Linux2023
+
+#!/bin/bash
+sudo yum update -y
+sudo yum install httpd -y
+sudo yum install wget unzip -y
+sudo systemctl start httpd
+sudo systemctl enable httpd
+sudo wget https://www.free-css.com/assets/files/free-css-templates/download/page291/atlas.zip
+sudo unzip atlas.zip
+sudo cp -rvf /Atlas/*  /var/www/html/
+sudo systemctl restart httpd
+
+=========================================================================
+Ubuntu-Server22.04
+
+#!/bin/bash
+sudo apt update -y
+sudo apt install apache2 -y
+sudo apt install wget unzip -y
+sudo systemctl start apache2
+sudo systemctl enable apache2
+sudo wget https://www.free-css.com/assets/files/free-css-templates/download/page290/wave-cafe.zip
+sudo unzip wave-cafe.zip
+sudo cp -rvf /2121_wave_cafe/*  /var/www/html/
+
+#!/bin/bash
+sudo yum update -y
+sudo yum install httpd wget unzip  -y
+sudo systemctl start httpd
+sudo systemctl enable httpd
+sudo wget https://www.free-css.com/assets/files/free-css-templates/download/page290/tourist.zip
+sudo unzip  tourist.zip
+sudo cp -rf travel-agency-html-template/* /var/www/html/
+sudo echo "PermitRootLogin  yes" >> /etc/ssh/sshd_config
+sudo sed -i "/^[^P]*PasswordAuthentication[[:space:]]no/c\PasswordAuthentication yes" /etc/ssh/sshd_config
+sudo systemctl restart sshd
+sudo echo 111 | passwd  --stdin  root
+sudo echo 111 | passwd  --stdin  ec2-user

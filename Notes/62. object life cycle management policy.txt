@@ -1,0 +1,20 @@
+S3 Object Lifecycle Management:
+
+S3 Object lifecycle can be managed by using a lifecycle configuration, which defines how S3 manages objects during their lifetime.
+Lifecycle configuration enables simplification of object lifecycle management, for e.g. moving of less frequently access objects, backup or archival of data for several years, or permanent deletion of objects,
+S3 controls all transitions automatically
+Lifecycle Management rules applied to a bucket are applicable to all the existing objects in the bucket as well as the ones that will be added a new
+
+S3 Object lifecycle management allows 2 types of behavior
+There are 2 types of actions:
+
+ Transition actions: Moving objects from one storage class to another storage class. Each storage class has a different cost associated with it.
+
+ Expiration actions: When objects expire after a span of time (say 30 days,60 days, etc). Amazon S3 deletes expired objects on your behalf. 
+===========================================================
+service -s3 - create bucket - bucket name( my7m-bucket) - region (default) - Bucket settings for block public access (remove block check box) - Turning off block (select i acknowledge) - create bucket.
+
+click on bucket - upload file - add file - upload any image - storage class (standad) - upload.
+
+go to management - lifecycle - add life cycle - rule name (mydatalife)  - choose rule scope (apply to all object in bucket)  - next -  storage class transition (select current and privous) - add transitions as per requirement - Next - save.
+

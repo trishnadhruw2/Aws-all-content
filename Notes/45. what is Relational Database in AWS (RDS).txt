@@ -1,0 +1,53 @@
+What is RDS?
+RDS stands for Relational Database Service.
+It is a managed DB service for DB that use SQL as query language.
+It allows you to create a databases in cloud that are managed by AWS-
+- Postgres
+- MySQL
+- MariaDB
+- Oracle
+- Microsoft SQL Server
+- Aurora (AWS Proprietary Database)
+======================================================================================
+Benefits and Features
+
+Easy to Administer
+Amazon RDS makes it easy to go from project conception to deployment. Access the capabilities of a production-ready relational database in minutes. No need for infrastructure provisioning, and no need for installing and maintaining database software.
+
+Highly Scalable
+You can scale your database's compute and storage resources with only a few mouse clicks or an API call, often with no downtime. Many Amazon RDS engine types allow you to launch one or more Read Replicas to offload read traffic from your primary database instance.
+
+Available and Durable
+Amazon RDS lets you deploy a database across multiple Availability Zones and automatically fails over to a standby instance in case of an outage. Amazon RDS has many other features that enhance reliability for critical production databases, including automated backups, database snapshots, and host replacements.
+
+Fast
+Amazon RDS supports the most demanding database applications. You can choose between two SSD-backed storage options: one optimized for high-performance OLTP applications, and the other for cost-effective general-purpose use.
+
+Secure
+Amazon RDS makes it easy to control network access to your database. Your databases run in Amazon Virtual Private Cloud (Amazon VPC), which enables you to isolate your databases and securely connect to your existing IT infrastructure. Amazon RDS also offers encryption of data at rest and encryption in transit.
+
+Inexpensive
+You pay very low rates and only for the resources you actually consume. In addition, you benefit from the option of On-Demand pricing with no up-front or long-term commitments, or even lower hourly rates via our Reserved Instance pricing.
+======================================================================================
+In AWS fully managaed Relational Database Engine service where AWS is reponsible for -
+- Security and Patching
+- Automated Backup
+- Software updates for the Database Engine
+- Automatic Failover
+======================================================================================
+The settings Managed by users are-
+- Managing database settings (such as username,password,database instance type etc)
+- Creating Relational Database Schema
+- Database Performance Tunning
+======================================================================================
+There are two licensing options-
+1. BYOL - Bring Your own License
+2. License Includes - License From AWS on an hourly basis.
+======================================================================================
+Type of Template Available in RDS-
+1. Production - use for high availability and fast, consistent performance.
+2. Dev/Test- use for development purpose.
+3. Free Tier - use free for develop new app,test existing app or learning purpose as a hands-on experience with Amazon RDS.
+
+
+====================================================================================== 

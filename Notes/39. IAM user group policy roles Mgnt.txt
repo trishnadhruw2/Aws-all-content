@@ -1,0 +1,81 @@
+For Create User
+=================
+Create User IAM:
+Login AWS account via root user - IAM (service) - Access Management - User - add user - user name (awsuser1) - Select AWS Access Type ( select Access Key and Password ) - Next: Permission - Next:tags - Next:Review - create user.
+
+Create 2 EC2 Instances:
+Create two AMI Linux 2 instancess with different AZ - server1 and server2 - after start both instance stop server1 instance - then login as a awsuser1 (IAM user created in above step) - try to start server1 and try to stop server2 - it failure cause of insufficent permission ( user not have any permission)
+======================================================================================================
+For Add permission
+Login as a root user - IAM service - Access management - user - click on awsuser1 - Permissions - Add permission - Attach existing policies directory - search - AmazonEc2ReadOnlyAccess (select) - Next:Review - Add permissions.
+
+Now to tab where awsuser1 login - Refresh Page - now user can see both instancess - but we cant start or stop instance.
+======================================================================================================
+Give start or stop permission
+
+Now login again root user - IAM service - Access management - Policies - Create Policy - Visual Editor - Service - EC2 - Actions - Search (startinstances and stopinstancess ) - Now click on Resourcess  - Specific - Add ARN - Region (select region or its code ) - Account  ( my account id) - Instance ID ( Paste Instance id on which we want to give above permission - server2) - Click on Add - click on Review Policy - Name (give name to policy - StartStopInstance) - Description - Create Policy.
+
+Now in policy list - select Filter Policies (customer managed) - select StartStopInstance -  select this policy - click on Policy Action - Attach - select awsuser1 - Attach Policy.
+
+Now to tab where awsuser1 login - Refresh Page - Now verify as per policy user can manage start stop permission for server2. - we failure to start stop server1.
+
+======================================================================================================
+Create Group Account:
+Login AWS account via root user - IAM (service) - Access Management -  Group - Create New Group - puneadmingrp - Next Step - search and select AmazonEC2FullAccess - Next Step - Create Group - Users (select user to add in group awsuser2) - add users.
+
+create new user - we have option add user to group,copy permission from existing users - attach existing policies directly.
+======================================================================================================
+
+Create Policy Using Json:
+
+Now login again root user - IAM service - Access management - Policies - Create Policy - JSON -
+
+{
+"Version": "2012-10-17",
+"Statement": [
+    {
+        "Effect": "Allow",
+        "Action": [
+            "ec2:DescribeInstances"
+        ],
+        "Resource": "*"
+    },
+    {
+        "Effect": "Allow",
+        "Action": [
+            "ec2:StartInstances", 
+            "ec2:StopInstances",
+            "ec2:RebootInstances",
+            "ec2:TerminateInstances"
+        ],
+        "Resource": "arn:aws:ec2:ap-south-1:148574222198:instance/i-0ba2df8b3668d93cb"
+    }
+]
+}
+------------------------------------------------------------------------------------------------------
+We apply created json format policy on server2 instance.modify it as per following way
+
+"Resource": "arn:aws:ec2:region:user:instance/instance-ID"
+
+Ans-
+"arn:aws:ec2:<region code>:<account number>:instance/<instance id>
+------------------------------------------------------------------------------------------------------
+
+After modify 
+
+Review Policy  - Name ( StartStop-Json) - Description - Create Policy - Filter policy - custom managed - select policy - click on Policy Action - Attach - select awsuser3 - Attach Policy.
+
+
+Login through awsuser3 and try to start stop instance
+ 
+========================================================================================================================================================================================
+
+Role: 
+IAM role is an IAM entity that defines a set of permissions for making AWS service requests. IAM roles are not associated with specific user or group. Instead, trusted entitiies assume roles such a as IAM users, Applications or AWS services such as EC2.
+simply,we can define which service access other servicess.
+
+For create Role
+
+login again root user - IAM service - Access management - Role - Create Role - AWS Service - EC2  - Next: permissions - AmazonDynamoDBFullAccess - Next Tags- Role Name (DynamoDataAccess) - Create role.
+
+

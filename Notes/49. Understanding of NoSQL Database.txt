@@ -1,0 +1,54 @@
+Introduction to NoSQL
+NoSQL/Not Only SQL or Not SQL:
+
+It was developed by Carl Strozri in 1998
+It is a non-Relational DBMS.
+It easy to scale
+It provide greater flexibility than SQL because it store or handle structure, semistructure, unstructured and polymorphic data in the form of graph,charts, objects etc.
+It lack of standardization of query language.
+It required a documentation to rich community to learn and problem solving.
+
+A NoSQL originally referring to non SQL or non relational is a database that provides a mechanism for storage and retrieval of data. This data is modeled in means other than the tabular relations used in relational databases.
+
+Came into existence in the late 1960s, but did not obtain the NoSQL alias until a flow of popularity in the early twenty-first century.
+
+Popularly use to handle large database such as twitter,facebook,google,youtube etc. where store collect thousands of terabyte data.
+
+
+Example of NoSql
+
+- MongoDB
+- Bigtable
+- Redis
+- Cassandra
+- DynamoDB
+- Reven
+
+Out of Relatoinal DB(SQL) and NoSQL which is better is depend on which application we use it.
+- NoSQL required low cost hardware
+- NoSQL is faster than Relation Database
+- Horizontal scaling easily possible in NoSQL.
+- NoSQL is suitable for online database (analytical) processing.
+
+Type of No-SQL Databases
+
+1. Columan Database - 
+This database store database in the formate of column instead of rows.
+
+eg.
+cassandra,HBase
+
+2. Document Database -
+It store the database in the formate in document formate.
+eg.
+MongoDB, CouchDB, RevenDB
+
+3. Key Value Database -
+It use key value like a primary key in relational database.
+eg.
+Redis, Riak, DynamoDB, TokyoCabinet.
+
+4. Graph Based Database -
+It store data in formate of graph.
+eg.
+Neo4J,FlockDB.

@@ -1,0 +1,35 @@
+Implementing RDS Database(Mariadb) instance in AWS and access using linux instance:
+
+Steps1:
+
+Create RDS Instance
+
+Services - RDS - Create database - choose a database creation method (Standard Create) - Engine Options - MariaDB -  - Version (MariaDB 10.0.*) - Templates - Free tier - credentials settings - admin - master password (India123) -DB Instance class (default) - Storage - enable storage autoscaling (deselect) -  connectivity -public access (yes) - VPC security group - create new - New vpc security group name ( db-secgrp) - Monitoring - Additional configurations - Initial database name (mydb1) - Backup (deselect) - Create Database.
+
+Click on database-1 - connectivity & security - endpoint (copy it - required for access database)
+
+VPC security groups - select db-secgrp - Make sure that in db-secgrp enable mysql/auroa tcp 3306 anywhere.
+also add ssh tcp 22 anywhere - save.
+
+=========================================================================================
+Accessing RDS in AWS
+
+For Access above created database using Instance
+
+Create EC2 Instance-
+EC2 - Launch Instance - Amazon Linux - security group (select existing = db-secgrp) - Launch Instance - view instance - Access it using putty - install database 
+#sudo su
+#yum update -y
+#yum install mysql -y(mariadb)
+
+=========================================================================================
+#mysql -h database-1.crbivp94aigh.eu-west-2.rds.amazonaws.com  -u admin -p mydb1
+
+#mysql -h  <endpoint address paste here>  -u admin -p mydb1
+
+type set password for admin user
+India123
+
+MySQL>
+
+exit

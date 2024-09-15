@@ -1,0 +1,55 @@
+Web hosting in AMI Linux2
+======================================================================================================
+Step1: Create and Launch instance
+---------------------------------
+Open EC2 Instance - Launch Ubuntu with default settings - access it using putty.exe (Username = ubuntu)
+
+------------------------------------------------------------------------------------------------------
+Step2: Login as ubuntu
+
+switch as a sudo user
+#sudo su
+
+Update packages
+#apt-get update -y
+
+Install apache package
+#apt-get  install   apache2   -y
+
+Verify version
+#apache2  -v
+
+Start enable httpd service
+#systemctl start apache2
+#systemctl enable apache2
+------------------------------------------------------------------------------------------------------
+Step3: Create sample web page
+
+#cd /var/www/html/
+#vim index.html
+ <html>
+         <head><title>Ubuntu</title></head>
+        <body bgcolor=skyyellow>
+        <h1>Welcome to Apache2 on Ubuntu Webserver, hosted on AWS Cloud</h1>
+        </body>
+ </html>
+
+:wq
+------------------------------------------------------------------------------------------------------
+Step4: Restart httpd service
+
+#systemctl restart apache2
+ 
+------------------------------------------------------------------------------------------------------
+Step5: For Access Web site
+
+Note.
+For access web site hosted on AWS Instance add http service in security group.
+
+Open web browser add type 
+http:18.2.10.25 (public ip of Linux Apache Server)
+
+
+
+
+

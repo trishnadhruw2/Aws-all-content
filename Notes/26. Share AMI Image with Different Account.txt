@@ -1,0 +1,22 @@
+Steps for share AMI Image with different account:
+====================================================================================================
+Step1: Create AMI Image:
+Create AMI image from any running instance,after create check it availabe or not in 
+Service - EC2 - Images- AMI.
+====================================================================================================
+Step2 : share image with different Account
+
+Service - EC2 - Images- AMIs - select image to share (linux-server) - Action - Edit AMI Permissions - AMI ID (default) - Associated Snapshot IDs (default) - AMI availability (private) - Shared accounts - Add account ID -AWS Account ID (paste here copied ID) - Share AMI - select account id - save changes.
+====================================================================================================
+Step3: Login with Shared account ID
+
+Services - EC2 - Images - AMI Catalog - MY AMIs - select (shared with me ).
+or
+Login into same region - EC2- Images - AMIs.
+====================================================================================================
+Step4: For launch Instance with shared image
+Services - EC2 - Launch Instance - Applicatins and OS images - Browse More AMIs - My AMIs - shared by others - select shared image name - Launch Instance - View All Instance.
+
+then access instance with putty or also try website available or not from browser. (add http into secure group)
+====================================================================================================
+

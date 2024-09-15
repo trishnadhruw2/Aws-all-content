@@ -1,0 +1,36 @@
+Steps For Create VPC:
+-----------------------------------------------------------------------------------------------------
+
+1. Create an VPC
+2. Create Subnet
+3. Create IGW (Internet Gateway) & Attach to created VPC
+4. Create Routing table
+5. Add IGW in Routing Table (0.0.0.0/0)
+6. Launch EC2 Instance.
+
+======================================================================================================
+1. Create VPC - pune-vpc = 10.0.0.0/24
+
+2. Create Subnet
+		pune-subnet1 : 10.0.0.0/27
+		pune-subnet2 : 10.0.0.32/27
+		pune-subnet3 : 10.0.0.64/27
+
+3. Create IGW (Internet Gateway) & Attach to created VPC (pune-vpc)
+
+4. Create Routing Table ( add igw and associate avaialbe subnet)
+
+5. Create EC2 Instance.
+======================================================================================================
+1. Create VPC - mumbai-vpc = 192.168.0.0/24
+
+2. Create Subnet
+		mumbai-subnet1 : 192.168.0.0/28
+		mumbai-subnet2 : 192.168.0.16/28
+		mumbai-subnet3 : 192.168.0.32/28
+
+3. Create IGW (Internet Gateway) & Attach to created VPC (mumbai-vpc)
+
+4. Create Routing Table ( add igw and associate avaialbe subnet)
+
+5. Create EC2 Instance.

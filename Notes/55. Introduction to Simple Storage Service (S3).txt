@@ -1,0 +1,43 @@
+What is Amazon S3?
+Amazon S3 is a secure and redundant storage system that uses a flat object storage structure.
+
+Data is stored in three different physical availability zone that also provides redundancy.
+
+Different storage classes options are offered, balacing cost and availability. Automated management of storage can move objects to cheaper storage classes if they are accessed infrequently. Objects can also be automatically expire and be deleted after a specified time.
+
+================================================================
+Amazon S3 Features
+The concept of object-based storage allows Amazon to provide useful features and high flexibility for storing data in Amazon S3 storage and management. Let’s review these features.
+
+Versioning
+Object versioning allows you to store multiple versions of an object in one bucket. This feature can protect objects stored in Amazon S3 storage against unintended editing, overwrites, or deletions. After changing or deleting an object you can restore one of the previous versions of that object. Versioning is implemented due to using the object storage approach. You can use versioning for archival purposes. Versioning is disabled by default.
+
+====================================================================================
+AWS S3 Benefits
+Some of the benefits of AWS S3 are: 
+
+Durability:  S3 provides 99.999999999 percent durability.
+
+Low cost: S3 lets you store data in a range of “storage classes.” These classes are based on the frequency and immediacy you require in accessing files. 
+
+Scalability: S3 charges you only for what resources you actually use, and there are no hidden fees or overage charges. You can scale your storage resources to easily meet your organization’s ever-changing demands.
+
+Availability: S3 offers 99.99 percent availability of objects
+
+Security: S3 offers an impressive range of access management tools and encryption features that provide top-notch security.
+
+Flexibility: S3 is ideal for a wide range of uses like data storage, data backup, software delivery, data archiving, disaster recovery, website hosting, mobile applications, IoT devices, and much more.
+
+Simple data transfer: You don’t have to be an IT genius to execute data transfers on S3. The service revolves around simplicity and ease of use.
+=====================================================================
+Storage classes
+Amazon S3 storage classes define the purpose of the storage selected for keeping data. A storage class can be set at the object level. However, you can set the default storage class for objects that will be created at the bucket level.
+
+S3 Standard is the default storage class. This class is hot data storage and is good for frequently used data. Use the Standard storage class to host websites, distribute content, develop cloud applications, and so on. High storage costs, low restore costs, and fast access to the data are the features of this storage class.
+
+S3 Standard-IA (infrequent access) can be used to store data that is accessed less frequently than in S3 Standard. S3 Standard-IA is optimized for a longer storage duration period. There is a charge for retrieving data stored in the S3 Standard-IA storage class. Additionally, in both S3 Standard and S3 Standard-IA you have to pay for data requests (PUT, COPY, POST, LIST, GET, SELECT).
+
+S3 One Zone-IA is designed for infrequently accessed data. Data is stored only in one availability zone (data is stored in three availability zones for S3 Standard) and as a result, a lower redundancy and resiliency level is provided. The declared level of availability is 99.5%, which is lower than that of the other two storage classes. S3 One Zone-IA has lower storage costs, higher restore costs, and you have to pay for data retrieval on a per-GB basis. You can consider using this storage class as cost effective to store backup copies or copies of data made with Amazon S3 cross-region replication.
+
+S3 Glacier doesn’t offer instant access to stored data, unlike the other storage classes. S3 Glacier can be used to store data for long term archival at a low cost. There is no guarantee for uninterrupted operation. You need to wait from a few minutes to a few hours to retrieve the data. You can transfer old data from storage of a higher class (for example, from S3 Standard) to S3 Glacier by using S3 lifecycle policies and reduce storage costs.
+

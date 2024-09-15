@@ -1,0 +1,21 @@
+Record your screen when you solve following Questions (Audio Not Required)
+
+Recording Tools:(any one tool you can use)
+
+ShareX
+Free Screen Recorder 10.8.0
+
+==============================================================================================
+1. A. Create VPC "myvpc" with 10.0.0.0/16 CIDR in Mumbai Region.
+   B. Create Subnet (10.0.1.0/24),create Internet Gateway and Routing Table for myvpc.
+
+2. Create EC2 Instance in myvpc with AMI Linux 2023, Host website using Apache "Welcome To SevenMentor"
+
+3. Create EC2 Instance in myvpc with Windows Server 2022, Host website using IIS "Welcome to AWS Cloud"
+
+4.Create AMI Image of above running Aapche Web Server (AMI Linux 2023).
+
+5. Add 10 GB Hard Disk in above running windows server 2022.( Z Drive)
+
+
+==============================================================================================

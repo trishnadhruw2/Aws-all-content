@@ -1,0 +1,41 @@
+Web hosting in Windows Server 2012/2016/2019/2022
+======================================================================================================
+Step1: Create and Launch Instance
+----------------------------------
+
+Setup webserver by using IIS (Internet Information Service)
+
+Step1:Lanuch Instance
+
+Open EC2 Instance - Windows Server 2016 Base - with default settings - launch Instance - access it using RDP Client.
+
+------------------------------------------------------------------------------------------------------
+Step2: Login as Administrator user
+
+Server Manager - Manage - Add Roles and Features - Next -Next -
+Next -select "Web Server IIS" - add features - Next - Next - Next - Install - Close.
+
+------------------------------------------------------------------------------------------------------
+Step3: Create sample webpage
+
+Open - MyComputer(This PC) - C Drive - inetpub - wwwroot - delete existing files and create new index.html (as per your choice).
+
+------------------------------------------------------------------------------------------------------
+Step4: create text file and write following code
+
+<html>
+<head><title>WinIIS</title></head>
+<body bgcolor=skyblue>
+<h1>Welcome to Windows IIS Webserver, hosted on AWS Cloud</h1>
+</body>
+</html>
+
+Save as file as a "index.html" name.
+------------------------------------------------------------------------------------------------------
+step5: For Access Web site
+
+Note.
+For access web site hosted on AWS Instance add http service in security group.
+
+Open web browser add type 
+http:18.2.10.25 (public ip of Windows IIS Server)

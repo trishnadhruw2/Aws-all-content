@@ -1,0 +1,106 @@
+Create Docker file,upload on ECR and Deploy on ECS:
+=======================================================
+Step I. Install  start enable docker
+
+1. install docker
+#yum install docker -y
+
+2. start and enable docker
+#systemctl start docker
+#systemctl enable docker
+#systemctl status docker
+
+3. Verify docker version
+#docker -v
+------------------------------------------------------------------
+Step II. Create docker image by using Dockerfile
+
+1. create directory
+#mkdir  /Docker
+#cd   /Docker
+
+2. creaet docker file
+#vim   Dockerfile
+from httpd
+run apt-get update -y
+run apt-get install wget unzip -y
+run wget https://www.free-css.com/assets/files/free-css-templates/download/page284/painter.zip
+run unzip painter.zip
+run cp -rvf painting-company-website-template/* /usr/local/apache2/htdocs/
+expose 80
+:wq
+
+3. for build image from docker file
+#docker   build   -t   painter   .
+#docker  images
+
+4. Run container using painter image
+#docker   run   -dt   --name=c1   -t  -p  80:80   painter
+
+5. Open browser 
+http://12.55.144.12
+---------------------------------------------------------------------------------------------------------------------
+Step III. Remove running container and created image
+
+#docker  kill  c1
+#docker  rm  c1
+#docker  rmi  painter
+
+----------------------------------------------------------------------------------------------------------------------
+Step IV.  Create IAM use and login from EC2- terminal
+
+1. create IAM user with administrative privilege to upload container image in ECR
+Service - IAM - user - create user (cli access) - create access/secrete key- download it.
+
+2. Login aws account via EC2 - cli
+#aws  configure
+
+AWS Access Key ID [None]: 
+AWS Secret Access Key [None]: 
+Default region name [None]: ap-south-1
+Default output format [None]: press enter for none
+
+------------------------------------------------------------------
+Step V.  Create Repository and Upload Image into ECR
+
+1. Create registory
+Service -  ECR - public registry - create repository - visibility settings (public) - registory name (myrepo) - create repository.
+click on created repository "myrepo" - click on "view push commands" and run one by one all command ec2 termial.
+
+2.  Execute "View Push Commands" on EC2 terminal
+
+#cd  /Docker
+#aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/d4j3m8m4
+
+#docker build -t myrepo .
+
+#docker tag myrepo:latest public.ecr.aws/d4j3m8m4/myrepo:latest
+
+#docker push public.ecr.aws/d4j3m8m4/myrepo:latest
+
+---------------------------------------------------------------------------------------------------
+StepVI. Deploy uploaded image into ECS ( Elastic Container Service )
+
+1. Create Task Defination
+
+Service - ECS - tasks defination - create new task defination - create new task defination - task defination family (mytasks) - launch type ( AWS Fargate ) - OS/architecture (Linux/X86_64) - CPU (.25vCPU) - Memory (.5GB) -  Task Role (ecsTaskEx.....) - Task ExecutionRole (create new role) - container name (mycontainer) - Image uri ( paste here ECR image uri) - remove checkbox ( use log collection ) -  Create.
+
+2. Create Cluster
+Service - ECS - Cluster - Create Cluster (mycluster) - infrastructure (AWS Fargate) - create.
+click on cluster name (myscluster) - service- create - launch type ( fargate ) - application type - tasks - family (mytasks) - create.
+
+3. Verify container website accessible or not
+click on tasks name (340cf91017) - Netwrok Bindings - copy External Link ip address and open it into web browser.
+
+4. if container website not open then verify security group ( http ) allow or not
+ECS - Clusters - mycluster - Tasks - 340cf91017 - Networking - Security Groups.
+---------------------------------------------------------------------------------------------------------------------
+Step VII. Destroy All
+
+1. select tasks - stop all .
+2. click on cluster - delete cluster.
+3. task defination - click on task name - action - deregister.
+4. Delete ECR registry 
+5.  Delete IAM user.
+6. Delete EC2 Instance.
+=====================================================================================

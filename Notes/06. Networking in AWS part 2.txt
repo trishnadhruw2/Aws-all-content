@@ -1,0 +1,131 @@
+private IP Range
+
+Class	Range		private Range
+A	0 -127		10.0.0.0 		- 10.255.255.255
+B	128 -191		172.16.0.0	- 172.31.255.255
+C	192 -223		192.168.0.0 	- 192.168.255.255
+
+Identify Private & Public IP
+
+192.168.1.20	c=private
+192.168.20.20	c=private
+192.16.20.10	c=public
+172.10.10.2	b=public
+172.20.1.2	b=private
+172.0.0.5		b=public
+10.5.2.5		a=private
+11.20.30.40	a=public
+------------------------------------------------------------------------------
+Private IP -
+Free of cost
+Unique ip address in LAN
+private ip address non routable over the internet
+
+Public IP -
+It is chargeable
+Unique ip address over the internet
+public ip address is routable over the internet
+---------------------------------------------------------------------------------------
+Create network for 10 computer
+Class = C
+
+2^H = 2^8 = 256-2 = 254
+192.168.1.0
+192.168.1.255
+
+10 => 254
+
+Subnetting -
+subnetting is process of take big network and break it into small small parts as per requirements.
+
+Why Subnetting?
+------------------------------------------------------------------
+enhance performance
+enhance security
+restrict ip wastage
+minimize traffic
+network isolation
+reduce hadache of router and network admin
+------------------------------------------------------------------------------------
+create network for 25 computer.
+
+Class =C
+
+192.168.0.0/24
+-------------------------------------------------------------------------------------
+Subnetting in C Class - 
+
+create network for 25 computer.
+Class =C
+
+192.168.0.0/24
+
+Identify Host Bit ?
+2^H=?
+2^3=8
+2^4=16
+2^5=32 -2 = 30
+
+32-5 = 27 ( network bit/cidr)
+---------------------------------------------------------------------------------
+192.168.0.0/27
+
+1. Subnet Mask = 
+11111111.11111111.1111111.11100000
+255.255.255.224
+
+2. Block Size =
+2^H = 2^H = 32
+
+3. Valid Host =
+2^H-2 = 2^5= 32-2=30
+
+4. Total Subnet =
+2^N = 2^3 = 8
+
+5. Subnet Table -
+
+Sub IP	192.168.0.0	192.168.0.32	192.168.0.64	192.168.0.96	...	192.168.0.224	
+F.V.  IP	192.168.0.1	192.168.0.33	192.168.0.65	192.168.0.97		192.168.0.225
+L.V. IP	192.168.0.30	192.168.0.62	192.168.094	192.168.0.126		192.168.0.254
+Bro IP	192.168.0.31	192.168.0.63	192.168.0.95	192.168.0.127		192.168.0.255
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+create subnet mask for 5 host
+
+Class =C 
+192.168.0.0
+
+Identify Host Bit?
+2^H=?
+2^2= 4
+2^3 = 8 -2 =6
+
+32-3= 29
+
+192.168.0.0/29
+
+1. Subnet Mask =
+11111111.111111111.11111111.11111000
+255.255.255.248
+
+2. Block Size ( Total Host ) =
+2^H= 2^3 =8
+
+3. Valid Host 
+2^H-2 = 8-2=6
+
+4. Total Subnet
+2^N = 5 = 32
+
+5. Subnet Table
+
+sub IP	192.168.0.0	192.168.0.8	192.168.0.16	...	192.168.0.248
+FV  IP	192.168.0.1	192.168.0.9	192.168.0.17		192.168.0.249
+LV  IP	192.168.0.6	192.168.0.14	192.168.0.22		192.168.0.254
+Br. IP	192.168.0.7	192.168.0.15	192.168.0.23		192.168.0.255
+
+
+----------------------------------------------------------------------------------------------

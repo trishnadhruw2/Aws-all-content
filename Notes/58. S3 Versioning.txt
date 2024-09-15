@@ -1,0 +1,40 @@
+What is S3 versioning in AWS?
+Versioning in Amazon S3 is a means of keeping multiple variants of an object in the same bucket. You can use the S3 Versioning feature to preserve, retrieve, and restore every version of every object stored in your buckets.
+==============================================================
+Step1: Create bucket
+
+Service - S3 bucket - Create Bucket - Bucket Name (my7mbucket) - Region (Default) - Bucket Settings for block public Access (remove check box of Block all public - i acknowledge tha the current settings) - Bucket Versioning (Enable) - Create Bucket.
+=============================================================
+Step2: Upload file in bucket
+
+create file on desktop
+file1.txt
+first version of file
+save.
+
+Then,
+Click on bucket Name(my7mbucket)- upload text file from desktop (file1.txt)
+
+=============================================================
+
+make sure versioning enabled on bucket.
+
+now modify desktop file
+add one more line in file
+
+mysecond line of file.
+my customer list
+ajay
+vijay
+suraj
+save it.
+
+upload it with same name.
+=============================================================
+now aws show only one file (latest) but it preserve old version also.
+
+select latest file and delete it.
+
+click on show version - select delete marker - action delete - it will restore again in bucket.
+
+

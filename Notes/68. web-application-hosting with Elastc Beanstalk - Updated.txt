@@ -1,0 +1,45 @@
+Steps For Hosting Web Application on Elastic Beanstalk:
+====================================================================
+Step1. Open "Elastic Beanstalk" service
+
+Services - Elastic Beanstalk - Create Application - Application Name (sevenmentor) -Domain (sevenmentor) [optional] - Platform (PHP) - Application Code ( sample application) - Preset "Configuration presets" Single instance (free tier eligible) - Next.
+
+
+[ Create Role For Service Access - open "IAM" Service in new tab - Role - Create Role - AWS Service - EC2 - next - select 3 permission policies "AWSElasticBeanstalkWebTier", "AWSElasticBeanstalkWorkerTier","AWSElasticBeanstalkMulticontainerDocker" - Next - Name (aws-elasticbeanstalk-ec2-role) - create Role. ]
+
+[ Create role is not present - Open "IAM" - Create Role - AWS Service - EC2 - next - select 2 permission policies    "AWSElasticBeanstalkEnhancedHealth" & "AWSElasticBeanstalkManagedUpdatesCustomerRolePolicy" - Next - Name (aws-elasticbeanstalk-service-role") - Create Role]
+
+Configure Service Access - Service Role - use as existing role - (aws-elasticbeanstalk-service-role) - EC2 Key Pair (mumbai-linux-server.ppk) - EC2 Instace profile (aws-elasticbeanstalk-ec2-role) - Next
+
+
+Setup Netwoking,database and tags - Virtual Private Cloud ( select default vpc ) - Instance settings - Public IP Address (Activated) - Instance subnet (ap-south-1a) - Next.
+
+Configure Instance Traffic and scaling - EC2 security group (defaults) - Next.
+
+Configure updates,monitoring and logging - Platform software (container option,proxy server - Apache) - Next.
+
+Review - check everything is fine - submit.
+
+Wait for Elastic Beanstak Launchig environment.
+After complete process - copy domain name ( sevenmentor.ap-south-1.elasticbeanstalk.com ) - open this url in web browser.
+
+
+Upload and Deploy Custome App-
+
+Service - Elastic Beanstalk - Environment - sevenmentor - click on "upload and deploy" -choose file - upload application in *.war file formate - Deploy.
+
+verify web page again after complete deployment update
+
+sevenmentor.ap-south-1.elasticbeanstalk.com
+
+Download sample app for testing purpose:
+
+http://csci.viu.ca/~barskym/teaching/DM2012/labs/LAB6/SampleApp.html
+https://tomcat.apache.org/tomcat-7.0-doc/appdev/sample/
+
+
+================================================================
+Remove Elastic Beanstalk:
+
+Service - Elastic Beanstalk - Environments - Sevenmentor-env - Action - Terminate environment - Terminate.
+Applications - sevenmentor - Action - Delete Application - Close.

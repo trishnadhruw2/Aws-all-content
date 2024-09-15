@@ -1,0 +1,113 @@
+
+What is Amazon Elastic File System?
+
+Amazon Elastic File System (Amazon EFS) provides a simple, serverless, set-and-forget elastic file system for use with AWS Cloud services and on-premises resources. It is built to scale on demand to petabytes without disrupting applications, growing and shrinking automatically as you add and remove files, eliminating the need to provision and manage capacity to accommodate growth. Amazon EFS has a simple web services interface that allows you to create and configure file systems quickly and easily. The service manages all the file storage infrastructure for you, meaning that you can avoid the complexity of deploying, patching, and maintaining complex file system configurations.
+
+Amazon EFS supports the Network File System version 4 (NFSv4.1 and NFSv4.0) protocol, so the applications and tools that you use today work seamlessly with Amazon EFS. Multiple compute instances, including Amazon EC2, Amazon ECS, and AWS Lambda, can access an Amazon EFS file system at the same time, providing a common data source for workloads and applications running on more than one compute instance or server.
+
+With Amazon EFS, you pay only for the storage used by your file system and there is no minimum fee or setup cost.
+=================================================================================================
+Lab:
+Share EFS with 2 Instances (AMI Linux2):
+
+Step 1: Create 2 Instancess in Diffent subnet:
+=====================================================================================
+Create 1st Instance AWS Linux2 (EFS-SERVER1)- Create in AZ Subnet 2a - create security group with NFS (2049 - anywhere) (EFS-SG) -  launch Instance.
+
+
+Create 2nd Instance AWS Linux2 (EFS-SERVER2)- Create in AZ Subnet 2b - select existing security group (EFS-SG) - launch Instance.
+======================================================================================
+Step2: Create EFS-
+
+Service - EFS - create file system (my-efs) - VPC (default) - Availability and Durability (Regional) - customize (default all) - next- select EFS-SG security group for all AZ - Next - go with File system policy (defaults) - Next - Create.
+
+=======================================================================================
+Step3: Acess both instances EFS-SERVER1 & EFS-SERVER2 using putty - login as a ec2-user
+
+$sudo su
+Install package for mount EFS
+
+#yum install amazon-efs-utils -y   (Amazon Linux 2)
+
+Access EFS storage using ec2
+
+create directory to mount
+#mkdir   /awspro
+
+install package to access efs
+#yum install amazon-efs-utils -y   (Amazon Linux 2023)
+#yum install amazon-efs-utils -y   (Amazon Linux 2)
+#apt-get install nfs-common -y      (Ubuntu Server 22.04)
+
+for mount
+#sudo mount -t efs -o tls fs-0e8754e002cb68187:/     /awspro              (amazon Linux2 /2023)
+
+# sudo mount -t nfs4 -o <Using the NFS client path> /awspro                (ubuntu server 22.04 ) &  (amazon Linux2 /2023)
+
+
+for verify:
+#mount
+#df   -h
+
+For permanent mount
+#vim  /etc/fstab
+fs-0e8754e002cb68187.efs.ap-south-1.amazonaws.com:/      /awspro     nfs     defaults        0 0
+:wq
+#mount -a
+======================================================================================
+Step4: 
+now go to Service - EFS - click on created efs (MY-EFS) - attach - mount via DNS (Using the EFS mount helper:) - copy command and paste in both ec2 instances
+
+sudo mount -t efs -o tls fs-0a496a8be4c1943e8:/ /mnt/efs
+#df -h
+
+#cd  /mnt/efs/
+#touch note{1..5}.txt
+#ls
+
+now go to other instance and check file is available or not
+#cd /mnt/efs/
+#ls
+
+Means bydefault stored data in EFS share in all instances.
+=======================================================================================
+Step5: Launch new Instance - Ubuntu
+
+Launch Instance - Ubuntu - Select AZ (subnet - 2c) - select existing security group (EFS-SG) - Launch Instance - view all instance.
+
+Access instance using Putty - (login as a ubuntu user)
+
+$sudo su
+#apt-get update -y
+#apt-get install nfs-common -y
+
+For mount EFS create directory
+#mkdir -p /AWS/mystorage
+
+Goto EFS Service - Click on MY-EFS - Attach - Using the NFS client:(copy address to mount in buntu)
+
+Pate copied link in ubuntu
+#sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-0a496a8be4c1943e8.efs.eu-west-2.amazonaws.com:/ /AWS/mystorage
+
+#df -h
+#cd /AWS/mystorage/
+#mkdir iamubuntu
+
+
+Above created directory visible on all other instances (efs mount point).
+=========================================================================================
+For permanent mounting
+#vim /etc/fstab
+
+172.31.5.44:/ /mnt/efs nfs      defaults        0 0
+
+:wq
+
+#mount -a 
+#df -h
+
+
+
+
+
+

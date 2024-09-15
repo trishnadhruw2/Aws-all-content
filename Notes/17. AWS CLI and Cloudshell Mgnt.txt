@@ -1,0 +1,90 @@
+AWS Interface
+AWS Console (GUI)| CLI - CLI,cloudshell,SDK.
+
+AWS offers an interface to its users through AWS Management Console and Command Line Interface, CLI. AWS management console is a web application that allows its users to view, monitor, and manage resources offered by AWS. The Command Line Interface is another tool to manage AWS services. The core functionality provided by the Command Line Interface is the same as that of the console.
+
+What is a Command Line Interface?
+Command Line Interface, i.e., CLI, is a command-line program that accepts the text input to execute the functions of an operating system. For example, every CLI has a command prompt that is displayed when the interface is ready to accept a command.
+
+The AWS instruction Interface is a tool to manage AWS services. By simple download and configuration of the CLI, a user can manually control the AWS services or automate them by writing scripts. It is a user-friendly way of interacting with the system using a graphical user interface knows as GUI.
+
+What is AWS CloudShell?
+AWS CloudShell is a browser-based, pre-authenticated shell that you can launch directly from the AWS Management Console. You can run AWS CLI commands against AWS services using your preferred shell, such as Bash, PowerShell, or Z shell. And, you can do this without needing to download or install command line tools.
+
+Why use AWS CLI instead of the console?
+Most users find it faster and easier to use the AWS CLI once they reach a certain level of proficiency. Scripting. The ability to automate control of all Amazon's web services with scripts is possibly the biggest benefit. Partial task automation can free developers from needing to log into the AWS Management Console.
+
+What is the benefit of using the CLI vs using the console?
+Whether you are writing a code or giving instructions to the computer CLI gives better control to the user. Navigating through different icons makes the GUI slow. Thus CLI offers better speed as commands are directly given to the computer. So many professionals preferred CLI because of its speed and performance
+
+Why is CLI difficult to use?
+CLI - Due to a higher degree of memorization and familiarity needed for operation and navigation, new users find operating a command line interface more difficult than a GUI. GUI - Because a GUI is visually intuitive, users learn how to use a GUI faster than a CLI.
+===================================================================================
+Step for access aws CLI:
+
+https://docs.aws.amazon.com/rekognition/latest/dg/setting-up.html
+
+To download AWS CLI Tool
+https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+
+After install aws cli tool - open command prompt - and verify aws version
+$aws --version
+
+to login aws using cli
+$aws configure
+
+AWS Access Key ID [None]: AKIAIOSFODNN7EXAMPLE
+AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+Default region name [None]: us-west-2
+Default output format [None]: text
+=====================================================================================
+Creating a VPC
+The first thing to do is to create a VPC(virtual private cloud) under which an EC2 instance will be launched. For creating a VPC in CLI type the given command on the cmd.
+
+$aws ec2 create-vpc --cidr-block 10.0.0.0/16
+=====================================================================================
+Creating Subnets
+Next, create two subnets and make one as public to make it accessible from the internet. To do so use the below command:
+
+$aws ec2 create-subnet --vpc-id <vpcId> --cidr-block 10.0.0.0/24
+$aws ec2 create-subnet --vpc-id <vpcId> --cidr-block 10.0.1.0/24
+
+=====================================================================================
+Creating Internet Gateway
+Internet gateway is used by the private subnet to access the internet for its updates and other packages installations. Create an internet gateway by using the following command:
+
+$aws ec2 create-internet-gateway
+
+After the internet gateway is created, note the InternetGatewayId and to attach this internet gateway to the already created VPC. To do so use the below command:
+
+$aws ec2 attach-internet-gateway --vpc-id <vpcId> --internet-gateway-id <InternetGatewayId>
+
+aws ec2 attach-internet-gateway --vpc-id vpc-0b7130b8b8afab9e2 --internet-gateway-id igw-0168a5feb7c24babf
+
+aws ec2 create-route-table --vpc-id vpc-0b7130b8b8afab9e2
+
+=====================================================================================
+Creating Route Table
+The next step is to create a route table and assigning it to the already created VPC. After creating the route table assign the route to this route table. Commands for the same are as given.
+
+$aws ec2 create-route-table --vpc-id <vpcId>
+Now, use the RouteTableId and use it in the next step:
+
+$aws ec2 create-route --route-table-id <RouteTableId> 
+              --destination-cidr-block 0.0.0.0/0 --gateway-id <nternetGatewayI>
+
+=====================================================================================
+Viewing the Route Table and Subnets
+To check whether route table and subnets are created and assigned successfully use the below commands:
+
+aws ec2 describe-route-tables --route-table-id <RouteTableId>
+aws ec2 describe-subnets --filters "Name=vpc-id,Values=<vpcId>"
+                         --query "Subnets[*].{ID:SubnetId,CIDR:CidrBlock}"
+=====================================================================================
+Creating Key Pair and Security Group
+The most important step is to create a key pair. This key pair must be kept safe and secure with the user so that the person can access the EC2 instance created using this key pair.
+
+Now, create the key-pair using the below command:
+
+aws ec2 create-key-pair --key-name AWS-Keypair --query "KeyMaterial" 
+                        --output text > "C:\AWS\AWS_Keypair.pem"

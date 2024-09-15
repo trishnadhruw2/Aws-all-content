@@ -1,0 +1,79 @@
+what is cloudwatch agent:
+Cloudwatch agent is a package,automatically and continuously collects metrics and logs from servers.
+
+Where you can install cloudwatch agent:
+- Amazon EC2
+- Hybrid Environment ( other cloud also )
+- On-premise VMs
+
+use for:
+- Memory/disk space logs
+- Operating system and custom applications logs
+- Collect logs and metric from container apps
+
+Prerequisites:
+- install cloudwatch agent
+- privileges to communicate with cloud watch agent
+  - EC2- IAM Instancess Role
+  - IAM user Access & Secrete Key
+
+Steps:
+
+1. Create EC2 Instance
+
+2. IAM - Role -Create Role - AWS Service - EC2 - select role "CloudWatchAgentAdminPolicy","CloudWatchAgentServerPolicy" "AmazonSSMFullAccess" - Role Name "ec2_cagent_role" - Create Role.
+
+3. Select Running EC2 - Action - Security - Modify IAM role - IAM Role " ec2_cagent_role" - update IAM role.
+
+4. go to running ec2 security group - allow inbound (RDP,SSH,HTTP - anywhere ) allow outbount (AllTraffic - anywhere)- save.
+
+5. Open running ec2 terminal - 
+$sudo su
+#yum install httpd -y
+#systemctl start httpd
+#systemctl enable httpd
+#echo "this is create for cloudagent demo testing" > /var/www/html/index.html
+
+Now install cloudwatch agent package
+#yum install amazon-cloudwatch-agent -y    (Amazon Linux 2/2023)
+
+#sudo amazon-linux-extras install collectd   (Amazon Linux2)
+or
+#yum install collectd -y  (Amazon Linux 2023)
+
+#/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-config-wizard
+Press enter for default options
+
+do you want to monitor any log files?
+
+go with default options
+
+log file path:
+/var/log/httpd/access-log
+
+do you want to specify any additional log file to monitor
+log file path:
+/var/log/httpd/error_log
+
+and finish it.
+
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c ssm:AmazonCloudWatch-linux
+
+6. Go to cloudwatch - Metric - All ( Paste Instance ID )
+   For log - Logs - Log Groups - select log available here.
+
+========================================================================
+Now create alert for disk utilization
+increase disk utilization use following command
+#fallocate -l 5G testing.img
+#ls 
+#du -sh testing.img 
+#df -h
+
+to increase cpu utilization use following command
+yes > /dev/null &
+top
+kill 3445
+
+
+=================================================================================

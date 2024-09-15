@@ -1,0 +1,85 @@
+Steps For Create AMI Image of Running Linux Webserver Instance -
+======================================================================================================
+Step1: Create Instance.
+Serivces  - EC2 - Name (Linux-Webserver) - Amazone Linux - Free Tier - Launch - View All Instances.
+======================================================================================================
+Step2: Access Instance From Putty
+Copy Public IP of Linux-Webserver and Access it using putty.
+
+Login as a ec2-user
+======================================================================================================
+Step3: Setup website using apacahe
+
+$sudo su
+#yum install httpd -y
+#systemctl start httpd 
+#systemctl enable httpd
+#vim /var/www/html/index.html
+	<html>
+	<head><title>Linux</title></head>
+	<body bgcolor=skyblue>
+	<h1>Welcome to Linux Apache Webserver, hosted on AWS Cloud</h1>
+	</body>
+	</html>
+:wq
+======================================================================================================
+Step4: Restart httpd service
+
+#systemctl restart httpd
+ 
+======================================================================================================
+Step5: For Access Web site
+
+Note.
+For access web site hosted on AWS Instance add http service in security group.
+
+Open web browser add type 
+http:18.2.10.25 (public ip of Linux Apache Server)
+======================================================================================================
+Step6: Create AMI Image from running Instanace
+
+Service - EC2 - Instances(running) - Select Instance (Linux-Webserver) - Action - Create Image & Template - Create Image - Image Name (Linux-Web) - Image discription (apache web server is running) - Create Image. 
+
+Note:
+(Dont remove running instance upto AMI Status Available)
+======================================================================================================
+Step7: Check status of create AMI Image
+
+Service - EC2 - Images - AMIs.
+
+======================================================================================================
+Step8 : Create Instance from Above Created AMI Image (Linux-Web):
+
+Service - EC2 - Launch Instance - Name (Apache) - my AMI's - Owned by me - Linux-Web - go with default options - Launch Instance - View All Instance.
+
+For Access Web site running on Create Instance.
+
+For access web site hosted on AWS Instance add http service in security group.
+
+Open web browser add type 
+http:17.2.10.25 (public ip of Linux Apache Server)
+
+======================================================================================================
+Step9: Share AMI Iamge with another Region:
+
+Copy AMI Image into Other region
+
+go Services - EC2 - Images - AMIs - select image - Action - Copy Image - select destination Region (sydeny)- Copy AMI.
+
+Step10: Go to Sydney Region
+Services- EC2 - Image - AMI 
+
+It show Linux-Web image, wait for available status.
+======================================================================================================
+Step10: Create Instance from London shared AMI Image:
+
+Service - EC2 - Launch Instance - Name (Apache1) - my AMI's - Owned by me - Linux-Web - go with default options - Launch Instance - View All Instance.
+
+For Access Web site running on Create Instance.
+
+For access web site hosted on AWS Instance add http service in security group.
+
+Open web browser add type 
+http:13.2.10.25 (public ip of Linux Apache Server)
+======================================================================================================
+
